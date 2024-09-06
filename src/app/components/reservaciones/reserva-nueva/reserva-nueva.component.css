@@ -1,0 +1,101 @@
+.input-group {
+  display: block; /* Esto hace que los elementos se apilen verticalmente */
+  margin-bottom:  1em; /* Agrega un margen inferior para separar los grupos de entrada */
+}
+
+.btn-spacing {
+  margin-right: 10px;
+ }
+
+ .btn-secondary-custom {
+  background-color: #6c757d; /* Color de fondo secundary */
+  color: white; /* Color del texto blanco para contraste */
+ }
+
+  /* Estilos para el botón de eliminar */
+  .btn-danger {
+    background-color: #dc3545; /* Color de fondo */
+    color: #fff; /* Color del texto */
+   }
+
+   /* Estilos para el botón de guardar */
+ .btn-success.save {
+  background-color: #17a2b8; /* Color de fondo */
+  color: #fff; /* Color del texto */
+ }
+
+   .btn-cancel-red {
+    background-color: red; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco para contraste */
+   }
+
+   input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin: 2px 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+   }
+
+ /* Estilos para elementos en modo de edición (si es necesario) */
+ .card-body div {
+  background-color: #fff; /* Cambia el color de fondo a blanco para resaltar el modo de edición */
+  border: 1px solid #ccc; /* Añade un borde para diferenciar el modo de edición */
+  padding: 10px; /* Añade un poco de padding para dar espacio alrededor del contenido */
+  border-radius: 5px; /* Suaviza las esquinas para una apariencia más suave */
+  margin-bottom: 10px; /* Añade un margen inferior para separar los elementos */
+ }
+
+ .modal-content {
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+}
+
+
+.card {
+  cursor: pointer;
+}
+
+.editable-mode {
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+}
+
+/* Animación suave al editar */
+.editable-mode:hover {
+  transform: scale(1.1);
+}
+
+
+.icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 24px; /* Ajusta el tamaño según sea necesario */
+  height: 24px;
+}
+
+.btn {
+  margin-left: 10px; /* Espacio entre los botones */
+}
+
+.icon-container button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon-container button:hover .icon {
+  fill: #007bff; /* Cambia el color al pasar el ratón si lo deseas */
+}

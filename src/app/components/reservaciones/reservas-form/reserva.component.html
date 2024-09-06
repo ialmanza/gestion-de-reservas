@@ -1,0 +1,99 @@
+
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-white">
+  <body class="h-full">
+  ```
+-->
+<div class="flex min-h-full flex-col justify-center">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <!-- <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"> -->
+    <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Generar Reserva </h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="card">
+      <form class="space-y-6" action="#" method="POST" (submit)="adicionarReserva(nombre, apellido, email, telefono, tipo_comida, horario, observaciones)">
+        <div>
+          <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
+          <div class="mt-2">
+            <input id="nombre" name="nombre" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #nombre>
+          </div>
+        </div>
+
+        <div>
+          <label for="apellidos" class="block text-sm font-medium leading-6 text-gray-900">Apellidos</label>
+          <div class="mt-2">
+            <input id="apellidos" name="apellidos" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #apellido>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+            <!-- <div class="text-sm">
+              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+            </div> -->
+          </div>
+          <div class="mt-2">
+            <input id="password" name="password" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #email>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="telefono" class="block text-sm font-medium leading-6 text-gray-900">Teléfono</label>
+          </div>
+          <div class="mt-2">
+            <input id="text" name="telefono" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #telefono>
+          </div>
+        </div>
+
+        <div>
+          <label for="tipo_comida" class="block text-sm font-medium leading-6 text-gray-900">Tipo de comida</label>
+          <div class="mt-2">
+            <input id="tipo_comida" name="tipo_comida" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #tipo_comida>
+          </div>
+        </div>
+
+        <div>
+          <label for="horario" class="block text-sm font-medium leading-6 text-gray-900">Horario</label>
+          <div class="mt-2">
+            <input id="horario" name="horario" type="text"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #horario>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <textarea name="comentario" id="comentario" placeholder="Aquí puede expresar para cuantas personas es la mesa y si tiene niños incluídos" rows="3"  class="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #observaciones></textarea>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Reservar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- <p class="mt-10 text-center text-sm text-gray-500">
+      Not a member?
+      <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
+    </p> -->
+  </div>
+</div>

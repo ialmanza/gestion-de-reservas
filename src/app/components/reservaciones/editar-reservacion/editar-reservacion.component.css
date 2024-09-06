@@ -1,0 +1,20 @@
+.custom-error {
+  color: #ec1a13;
+  border: 1px solid #d9534f;
+  background-color: #f9e2e2;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 0.875em;
+}
+
+.custom-alert {
+  background-color: #f9e2e2;
+  border-color: #d9534f;
+  color: #ec1a13;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+ }

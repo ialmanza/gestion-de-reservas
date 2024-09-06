@@ -1,0 +1,207 @@
+/* .form-container {
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.custom-stepper {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.step-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.mat-card {
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-stroked-button {
+  font-weight: bold;
+}
+
+.mat-raised-button {
+  font-weight: bold;
+  color: #ffffff;
+} */
+
+.example-stepper {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.circle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e2e8f0; /* Tailwind color for gray-200 */
+  color: #1f2937; /* Tailwind color for gray-900 */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.circle-button:hover {
+  background-color: #cbd5e1; /* Tailwind color for gray-300 */
+  transform: scale(1.1);
+}
+
+.circle-button.selected {
+  background-color: #6366f1; /* Tailwind color for indigo-500 */
+  color: white;
+}
+
+.calendario {
+  position: absolute;
+  z-index: 1000;
+  border: 1px solid #e2e8f0; /* Tailwind gray-200 */
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem; /* rounded-md */
+}
+
+.tipo-comida-button, .horario-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid #e2e8f0; /* Tailwind gray-200 */
+  background-color: #e2e8f0; /* Tailwind gray-200 */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tipo-comida-button.selected, .horario-button.selected {
+  background-color: #6366f1; /* Tailwind indigo-500 */
+  color: white;
+}
+
+.tipo-comida-button:hover, .horario-button:hover {
+  background-color: #cbd5e1; /* Tailwind gray-300 */
+}
+
+.demo-inline-calendar-card {
+  width: 300px;
+}
+
+.confirmar-button, .cancelar-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem; /* rounded-md */
+  font-weight: 500; /* medium */
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.confirmar-button {
+  background-color: #6366f1; /* Tailwind indigo-500 */
+  color: white;
+  border: 1px solid #6366f1; /* Border color similar to button color */
+}
+
+.confirmar-button:hover {
+  background-color: #4f46e5; /* Tailwind indigo-600 */
+}
+
+.cancelar-button {
+  background-color: #e2e8f0; /* Tailwind gray-200 */
+  color: #4b5563; /* Tailwind gray-700 */
+  border: 1px solid #e2e8f0; /* Border color similar to button color */
+}
+
+.cancelar-button:hover {
+  background-color: #cbd5e1; /* Tailwind gray-300 */
+  border-color: #cbd5e1; /* Darker gray on hover */
+}
+
+/* .card {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+} */
+
+
+.container {
+  display: flex; /* Flexbox para centrar */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Altura completa de la ventana */
+  background-color: #f8f9fa; /* Color de fondo opcional */
+}
+
+/* Estilo para las tarjetas */
+.card-container {
+  width: 400px; /* Tamaño de la tarjeta (ajústalo según sea necesario) */
+  max-width: 90%; /* Máximo tamaño para pantallas más pequeñas */
+  margin: auto; /* Margen automático para centrar en su contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Padding interno */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+h2 {
+  font-size: 1.25rem; /* Tamaño de fuente ajustado (20px) */
+  font-weight: 600; /* Peso de fuente seminegrita */
+  color: #333; /* Color de texto más oscuro y accesible */
+  margin: 0 0 16px; /* Margen superior de 0 y margen inferior de 16px */
+  text-align: center; /* Centrar el texto */
+  line-height: 1.4; /* Altura de línea para mejorar la legibilidad */
+  border-bottom: 2px solid #e0e0e0; /* Línea inferior sutil para separar visualmente */
+  padding-bottom: 8px; /* Espaciado inferior para separar del contenido */
+}
+
+.button-container {
+  display: flex; /* Alineación horizontal de los botones */
+  justify-content: center; /* Centramos los botones en el contenedor */
+  gap: 16px; /* Espacio entre los botones */
+  margin-top: 24px; /* Separación del resto del contenido */
+}
+
+.contact-card, .confirmation-card {
+  width: 80%; /* Aumentar el ancho de las tarjetas al 80% del contenedor */
+  max-width: 600px; /* Establecer un ancho máximo */
+  margin: 0 auto; /* Centrar la tarjeta */
+  padding: 20px; /* Añadir padding adicional para más espacio interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+  border-radius: 8px; /* Bordes más redondeados */
+  background-color: white; /* Fondo blanco */
+  transition: all 0.3s ease; /* Transición suave para efectos de hover */
+}
+
+.contact-card:hover, .confirmation-card:hover {
+  transform: scale(1.02); /* Efecto de agrandamiento suave al pasar el cursor */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más intensa en hover */
+}
+
+

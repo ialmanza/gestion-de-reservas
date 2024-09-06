@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+
+@import 'tailwindcss/tailwind.css';
+
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.form-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  margin-bottom: 20px;
+}
+
+.form-header img {
+  margin-right: 10px;
+}
+
+.form-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none; /* Usando el estilo consistente de login */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+  outline: 1px inset #d1d5db; /* Mantener outline como el de register */
+  transition: outline 0.2s, box-shadow 0.2s; /* Transición suave */
+  color: #1f2937; /* Manteniendo color consistente */
+}
+
+.form-group input:focus {
+  outline: 2px solid #007bff; /* Usando el color azul del login */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul */
+}
+
+.form-group .checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-group .checkbox input {
+  margin-right: 10px;
+}
+
+.form-group .checkbox label {
+  margin: 0;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff; /* Asegurar que el texto sea blanco */
+  transition: background-color 0.3s; /* Transición suave para hover */
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.form-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+    </style>
+</head>
+
+
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md bg-white p-8 rounded-lg shadow-lg">
+          <h2 class="text-center text-3xl font-extrabold text-gray-900">Register</h2>
+
+                    <form class="mt-8 space-y-6" action="#" method="POST">
+                        <div class="mb-4 md:flex md:justify-between">
+                            <div class="mb-4 md:mr-2 md:mb-0">
+                                <label class="block mb-2 text-sm font-bold text-gray-700" for="nombre">
+                                    Nombre
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="firstName"
+                                    type="text"
+                                    placeholder="Nombre"
+
+                                />
+                            </div>
+                            <div class="md:ml-2">
+                                <label class="block mb-2 text-sm font-bold text-gray-700" for="apellido">
+                                    Apellidos
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="lastName"
+                                    type="text"
+                                    placeholder="Apellidos"
+
+                                />
+                            </div>
+                        </div>
+                        <div class="mb-4 md:mr-2 md:mb-0">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="puesto">
+                                Puesto
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="firstName"
+                                type="text"
+                                placeholder="Puesto de trabajo"
+                            />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+                                Email
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                id="email"
+                                type="email"
+                                placeholder="Email"
+                            />
+                        </div>
+                        <div class="mb-4 md:flex md:justify-between">
+                            <div class="mb-4 md:mr-2 md:mb-0">
+                                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                                    Contraseña
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700  rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="password"
+                                    type="password"
+                                    placeholder="******************"
+                                />
+                            </div>
+                            <div class="md:ml-2">
+                                <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
+                                    Confirmar Contraseña
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="c_password"
+                                    type="password"
+                                    placeholder="******************"
+                                />
+                            </div>
+                        </div>
+                        <div class="mb-6 text-center">
+                            <button
+                                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                type="button"
+                            >
+                                Crear cuenta
+                            </button>
+                        </div>
+                        <hr class="mb-6 border-t" />
+
+                        <p class="mt-6 text-center text-sm text-gray-600">
+                          Ya tienes cuenta?
+                          <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">Ingresa a tu cuenta</a>
+                        </p>
+
+
+

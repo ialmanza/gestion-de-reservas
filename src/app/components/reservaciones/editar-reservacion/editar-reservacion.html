@@ -1,0 +1,40 @@
+
+<mat-dialog-content class="mat-typography">
+
+  <div class="form-group p-2">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" required [(ngModel)]="form.value.nombre" name="nombre" #nombre="ngModel" placeholder="Nombre">
+      <div [hidden]="nombre.valid || nombre.pristine" class="custom-error">
+        Nombre es requerido.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group p-2">
+    <label for="apellido">Apellidos:</label>
+    <input type="text" class="form-control" id="apellido" required [(ngModel)]="form.value.apellidos" name="apellido" #apellido="ngModel" placeholder="Apellido">
+    <div [hidden]="apellido.valid || apellido.pristine" class="custom-error">
+      Apellido es requerido.
+    </div>
+  </div>
+
+  <div class="form-group p-2">
+    <label for="email">Email:</label>
+    <input type="text" class="form-control" id="email" required [(ngModel)]="form.value.email" name="email" #email="ngModel" placeholder="Email">
+    <div [hidden]="email.valid || email.pristine" class="custom-error">
+      Email es requerido.
+    </div>
+  </div>
+
+  <div class="form-group p-2">
+    <label for="observaciones">Observaciones:</label>
+    <textarea class="form-control" placeholder="Observaciones" rows="3" [(ngModel)]="form.value.observaciones" name="observaciones" #observaciones="ngModel"></textarea>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button mat-button (click)="onYesClick()" cdkFocusInitial>Editar</button>
+</mat-dialog-actions>

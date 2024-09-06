@@ -1,0 +1,11 @@
+
+
+#settings-menu {
+  display: none; /* Oculto por defecto */
+}
+
+#settings-menu.show {
+  display: block; /* Muestra cuando se activa */
+}
+
+
