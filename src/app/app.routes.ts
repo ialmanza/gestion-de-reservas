@@ -5,7 +5,9 @@ import { AuthSignUpComponent } from './components/auth-sign-up/auth-sign-up.comp
 import { privateGuard } from './shared/guards/auth.guards';
 import { LayoutComponent } from './components/layout/layout.component';
 import { FormReservasComponent } from './components/form-reservas/form-reservas.component';
-
+import { RolesComponent } from './components/roles/roles.component';
+import { RolesTableComponent } from './components/roles-table/roles-table.component';
+import { RoleChangePassComponent } from './components/roles-change-pass/role-change-pass.component';
 
 export const routes: Routes = [
   {
@@ -73,10 +75,40 @@ export const routes: Routes = [
       {
         path:'reservas-form',
         loadComponent: () => import('./components/form-reservas/form-reservas.component').then(m => m.FormReservasComponent),
-      }
+      },
+      {
+        path: 'administrador-form',
+        loadComponent: () => import('./components/administradores/administrador-form/administrador-form.component').then(m => m.AdministradorFormComponent),
+       },
+       {
+        path: 'roles',
+        loadComponent: () => import('./components/roles/roles.component').then(m => m.RolesComponent),
+       },
+       {
+        path: 'roles-table',
+        loadComponent: () => import('./components/roles-table/roles-table.component').then(m => m.RolesTableComponent),
+       },
+       {
+        path: 'roles-change-pass',
+        loadComponent: () => import('./components/roles-change-pass/role-change-pass.component').then(m => m.RoleChangePassComponent),
+       }
     ]
    },
 
+   {
+    path: 'roles',
+    component: RolesComponent
+   },
+
+   {
+    path: 'roles-table',
+    component: RolesTableComponent
+   },
+
+   {
+    path: 'roles-change-pass',
+    component: RoleChangePassComponent
+   }
 
 
 ];

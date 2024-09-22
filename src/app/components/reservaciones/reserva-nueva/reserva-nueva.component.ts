@@ -1,18 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ReservasService } from '../../../services/reservas.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Reserva } from '../../../models/Ireserva';
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogContentEditExampleDialog } from '../editar-reservacion/editar-reservacion.component';
 
-//declare var bootstrap: any; // Declara bootstrap para usar JS del modal
 
 @Component({
   selector: 'app-reserva-nueva',
   standalone: true,
-  imports: [ CommonModule, FormsModule ],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule],
   templateUrl: './reserva-nueva.component.html',
   styleUrl: './reserva-nueva.component.css'
 })
@@ -20,17 +18,46 @@ export class ReservaNuevaComponent {
   @Input() reservas: Reserva | undefined;
   editing: boolean = false;
   private editModal: any;
+  isModalOpen = false;
+  editForm: FormGroup;
 
 
-  constructor( private reservasService: ReservasService, private dialog: MatDialog) {
+  constructor( private reservasService: ReservasService, private dialog: MatDialog, private fb: FormBuilder) {
+    this.editForm = this.fb.group({
+      id: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', Validators.required],
+      tipo_comida: ['', Validators.required],
+      horario: ['', Validators.required],
+      observaciones: ['']
+    });
    }
 
 
   ngOnInit(): void {
-    //this.editModal = new bootstrap.Modal(document.getElementById('editModal'));
-    //this.getReservas();
+    if (this.reservas) {
+      this.editForm.patchValue(this.reservas);
+    }
+   }
+
+  openEditDialog(reserva: any) {
+    this.isModalOpen = true;
+    this.editForm.patchValue(reserva);
   }
 
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  onSubmitEdit() {
+    if (this.editForm.valid) {
+      const updatedReserva = this.editForm.value;
+      this.reservasService.updateReserva(updatedReserva);
+      this.closeModal();
+    }
+  }
   deleteReserva(reservas : Reserva) {
     if(confirm('Está seguro que desea borrar esta reserva?')) {
       this.reservasService.deleteReserva(reservas.id);
@@ -41,36 +68,10 @@ export class ReservaNuevaComponent {
     this.editing = !this.editing;
   }
 
-  // saveChanges() {
-  //   if (this.reservas) {
-  //     this.reservasService.updateReserva(this.reservas);
-  //   }
-  //    this.toggleEdit(); // Desactiva la edición después de guardar
-    //this.closeModal();
-
-  //}
 
   openEditModal() {
     this.editing = true;
     this.editModal.show();
-  }
-
-  closeModal() {
-    this.editing = false;
-    this.editModal.hide();
-  }
-
-  openEditDialog(reserva: Reserva) {
-    const dialogRef = this.dialog.open(DialogContentEditExampleDialog, {
-      data: reserva
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        console.log(typeof(result));
-        this.reservasService.updateReserva(result);
-      }
-    });
   }
 
 

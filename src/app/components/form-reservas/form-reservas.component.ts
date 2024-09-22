@@ -1,4 +1,3 @@
-
 import {Component, inject} from '@angular/core';
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
@@ -18,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import {ChangeDetectionStrategy, model} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import emailjs from '@emailjs/browser';
+import { Resend } from 'resend';
 
 @Component({
   selector: 'app-form-reservas',
@@ -30,17 +31,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   styleUrl: './form-reservas.component.css'
 })
 export class FormReservasComponent {
-  personas = [1, 2, 3, 4, 5, 6, 7, 8]; // Opciones de cantidad de personas
-  cantidadSeleccionada: number | null = null; // Valor seleccionado
-  fechaSeleccionada: any;  // Para almacenar la fecha seleccionada
-  tipoComidaSeleccionada: string | null = null;  // Tipo de comida seleccionada (almuerzo o cena)
-  horarioSeleccionado: string | null = null;     // Horario seleccionado
-  horariosAlmuerzo = ['11:00 AM', '12:00 PM', '1:00 PM']; // Opciones para almuerzo
-  horariosCena = ['7:00 PM', '8:00 PM', '9:00 PM']; // Opciones para cena
+  personas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  cantidadSeleccionada: number | null = null;
+  fechaSeleccionada: any;
+  tipoComidaSeleccionada: string | null = null;
+  horarioSeleccionado: string | null = null;
+  horariosAlmuerzo = ['11:00 AM', '12:00 PM', '1:00 PM'];
+  horariosCena = ['7:00 PM', '8:00 PM', '9:00 PM'];
   selected = model<Date | null>(null);
   pasoActual: number = 1;
-  //apellidos = "";
-  //comentario = "";
+  id_email: string = '';
 
   private _formBuilder = inject(FormBuilder);
 
@@ -72,7 +72,9 @@ export class FormReservasComponent {
   }
 
   adicionarReserva() {
+    this.id_email = "";
     const id = Date.now().toString();
+    this.id_email = id;
 
     // Obtener valores de los FormGroups
     const nombre = this.nameFormGroup.get('nameCtrl')?.value as string;
@@ -82,7 +84,7 @@ export class FormReservasComponent {
     const observaciones = this.comentarioFormGroup.get('comentarioCtrl')?.value as string;
 
 
-    // Agregar reserva utilizando el servicio
+
     this.reservasService.addReserva({
       id,
       nombre,
@@ -96,8 +98,7 @@ export class FormReservasComponent {
     });
 
 
-    // Resetear los FormGroups
-
+    //this.sendByResend();
     this.reiniciarFormulario();
   }
 
@@ -105,7 +106,8 @@ export class FormReservasComponent {
     if (this.nameFormGroup.valid && this.apellidosFormGroup.valid && this.emailFormGroup.valid
       && this.cantidadSeleccionada !== null && this.horarioSeleccionado !== null) {
 
-      this.adicionarReserva();  // Añade la reserva
+      this.adicionarReserva();
+
 
     }
     this.router.navigate(['/layout']);
@@ -113,14 +115,14 @@ export class FormReservasComponent {
 
   seleccionarPersonas(numero: number) {
     this.cantidadSeleccionada = numero;
-    // Aquí podrías agregar lógica adicional para guardar la cantidad seleccionada
+    // Agregar lógica adicional para guardar la cantidad seleccionada
     console.log('Cantidad seleccionada:', numero);
   }
 
 
   seleccionarTipoComida(tipo: string) {
     this.tipoComidaSeleccionada = tipo;
-    this.horarioSeleccionado = null; // Resetea la selección de horario al cambiar de tipo de comida
+    this.horarioSeleccionado = null;
   }
 
   seleccionarHorario(horario: string) {
@@ -154,4 +156,30 @@ export class FormReservasComponent {
   }
 
 
-}
+  //EN DESARROLLO
+//     async send(){
+//       emailjs.init('okEjA9dn2w_9EpoeX');
+//       let response = await emailjs.send("service_bu227zg","template_7u644ss",{
+//         from_name: "Reservaciones",
+//         to_name: this.nameFormGroup.value.nameCtrl ,
+//         reply_to: this.emailFormGroup.value.emailCtrl,
+//         message: "Gracias por tu reserva, su identificación es" + this.id_email,
+//         });
+//         console.log(response);
+//         console.log("El correo se envió correctamente");
+//         alert("El correo se envió correctamente");
+//   }
+
+//     sendByResend() {
+//       const resend = new Resend('re_Pe6qVeXq_Cau3WSeqGk4DhsbMBxuUiUkt');
+
+//       resend.emails.send({
+//         from: 'reservaciones.desarrolloweb@gmail.com',
+//         to: this.emailFormGroup.value.emailCtrl!,
+//         subject: 'Reservación confirmada',
+//         html: '<p>Su código de reserva es <strong>' + this.id_email + '</strong>!</p>'
+//       });
+//       console.log("El correo se envió correctamente");
+//     }
+
+ }

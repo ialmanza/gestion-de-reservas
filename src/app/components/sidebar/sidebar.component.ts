@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../Auth/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 import 'flowbite'
 
 
@@ -13,9 +15,11 @@ import 'flowbite'
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  private authSubscription: Subscription | undefined;
   private _authService = inject(AuthService)
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
+
 
   async logout() {
     await this._authService.signOut();

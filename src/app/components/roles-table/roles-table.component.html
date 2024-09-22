@@ -1,0 +1,60 @@
+<div class="p-8 bg-gray-100 min-h-screen">
+  <h2 class="text-2xl font-semibold text-center mb-6">Usuarios</h2>
+  <div class="overflow-x-auto">
+    <table class="w-full table-auto bg-white rounded-lg shadow-lg">
+      <thead class="bg-indigo-600 text-white">
+        <tr>
+          <th class="p-4 text-left">Nombre</th>
+          <th class="p-4 text-left">Apellido</th>
+          <th class="p-4 text-left">Email</th>
+          <th class="p-4 text-left">Rol</th>
+          <th class="p-4 text-left">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles" class="border-b hover:bg-gray-50">
+          <td class="p-4">{{ role.nombre }}</td>
+          <td class="p-4">{{ role.apellido }}</td>
+          <td class="p-4">{{ role.email }}</td>
+          <td class="p-4">{{ role.rol }}</td>
+          <td class="p-4">
+            <button (click)="openEditModal(role)" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400">Editar</button>
+            <button (click)="onDelete(role.email)" class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-red-400">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal para editar -->
+<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+    <h2 class="text-xl font-semibold mb-4">Editar Rol</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="editRoleForm" class="space-y-4">
+      <div class="flex flex-col">
+        <label for="nombre" class="text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+        <input id="nombre" type="text" formControlName="nombre" class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="flex flex-col">
+        <label for="apellido" class="text-sm font-medium text-gray-700 mb-2">Apellido:</label>
+        <input id="apellido" type="text" formControlName="apellido" class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div class="flex flex-col">
+        <label for="email" class="text-sm font-medium text-gray-700 mb-2">Email:</label>
+        <input id="email" type="email" formControlName="email" class="border border-gray-300 rounded-md p-2" [disabled]="true">
+      </div>
+      <div class="flex flex-col">
+        <label for="rol" class="text-sm font-medium text-gray-700 mb-2">Rol:</label>
+        <select id="rol" formControlName="rol" class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="administrador">Administrador</option>
+          <option value="recepcionista">Recepcionista</option>
+        </select>
+      </div>
+      <div class="flex justify-between">
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500">Guardar Cambios</button>
+        <button (click)="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-400">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

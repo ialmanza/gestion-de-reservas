@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MeserosComponent } from './meseros.component';
+import { RoleChangePassComponent } from './role-change-pass.component';
 
-describe('MeserosComponent', () => {
-  let component: MeserosComponent;
-  let fixture: ComponentFixture<MeserosComponent>;
+describe('RoleChangePassComponent', () => {
+  let component: RoleChangePassComponent;
+  let fixture: ComponentFixture<RoleChangePassComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MeserosComponent]
+      imports: [RoleChangePassComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MeserosComponent);
+    fixture = TestBed.createComponent(RoleChangePassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
