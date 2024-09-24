@@ -63,5 +63,14 @@ export class ReservasService {
     }
   }
 
+  cancelReservation(reservationId: string, email: string): boolean {
+    const index = this.reservasSubject.value.findIndex(r => r.id === reservationId && r.email === email);
+    if (index !== -1) {
+      this.reservasSubject.value.splice(index, 1);
+      localStorage.setItem('reservas', JSON.stringify(this.reservasSubject.value));
+      return true; // La reserva fue cancelada
+    }
+    return false; // No se encontró la reserva
+  }
 
 }

@@ -4,17 +4,19 @@ import { AuthService } from '../Auth/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import 'flowbite'
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ RouterLink, RouterLinkActive ],
+  imports: [ RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  isSidebarOpen: boolean = false;
   private authSubscription: Subscription | undefined;
   private _authService = inject(AuthService)
 
@@ -25,5 +27,9 @@ export class SidebarComponent {
     await this._authService.signOut();
     this.router.navigate(['/admin']);
    }
+
+   toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 
 }

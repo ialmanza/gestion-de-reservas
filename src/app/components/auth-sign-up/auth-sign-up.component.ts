@@ -33,7 +33,8 @@ export class AuthSignUpComponent {
     if (this.form.invalid) return;
 
     try{
-      const authResponse= await this._authService.singUp(
+      //const authResponse= await this._authService.singUp(
+        const authResponse= await this._authService.signUp(
         {email: this.form.value.email ?? '', password: this.form.value.password ?? ''}
 
       );

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -77,4 +78,11 @@ export class RolesService {
     }
     return false;
   }
+
+  getRoleByEmail(email: string) {
+    const roles = this.getRolesFromStorage();
+    const role = roles.find((r) => r.email === email);
+    return of(role ? role.rol : null);
+  }
+
 }

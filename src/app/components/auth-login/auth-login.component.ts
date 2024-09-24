@@ -45,7 +45,7 @@ export class AuthLoginComponent {
       if (error) throw error;
 
 
-      this._router.navigate(['/layout']);
+      this._router.navigate(['/layout/dashboard']);
 
     } catch (error) {
       if (error instanceof Error) {

@@ -8,6 +8,9 @@ import { FormReservasComponent } from './components/form-reservas/form-reservas.
 import { RolesComponent } from './components/roles/roles.component';
 import { RolesTableComponent } from './components/roles-table/roles-table.component';
 import { RoleChangePassComponent } from './components/roles-change-pass/role-change-pass.component';
+import { CancelarReservacionComponent } from './components/reservaciones/cancelar-reservacion/cancelar-reservacion.component';
+import { RoleGuard } from './guards/role.guard';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 
 export const routes: Routes = [
   {
@@ -79,19 +82,27 @@ export const routes: Routes = [
       {
         path: 'administrador-form',
         loadComponent: () => import('./components/administradores/administrador-form/administrador-form.component').then(m => m.AdministradorFormComponent),
-       },
+        canActivate: [RoleGuard],
+      },
        {
         path: 'roles',
         loadComponent: () => import('./components/roles/roles.component').then(m => m.RolesComponent),
-       },
+        canActivate: [RoleGuard],
+      },
        {
         path: 'roles-table',
         loadComponent: () => import('./components/roles-table/roles-table.component').then(m => m.RolesTableComponent),
-       },
+        canActivate: [RoleGuard],
+      },
        {
         path: 'roles-change-pass',
         loadComponent: () => import('./components/roles-change-pass/role-change-pass.component').then(m => m.RoleChangePassComponent),
-       }
+        canActivate: [RoleGuard],
+      },
+       {
+        path: 'cancelar-reservacion',
+        loadComponent: () => import('./components/reservaciones/cancelar-reservacion/cancelar-reservacion.component').then(m => m.CancelarReservacionComponent),
+       },
     ]
    },
 
@@ -108,7 +119,17 @@ export const routes: Routes = [
    {
     path: 'roles-change-pass',
     component: RoleChangePassComponent
-   }
+   },
+
+   {
+    path: 'cancelar-reservacion',
+    component: CancelarReservacionComponent
+   },
+   {
+    path: 'access-denied',
+    component: AccessDeniedComponent // Crear un componente que muestre el mensaje de acceso denegado
+  },
+
 
 
 ];

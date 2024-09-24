@@ -1,0 +1,28 @@
+
+ <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="cancel-reservation-container sm:mx-auto sm:w-full sm:max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-center text-3xl font-extrabold text-gray-900">Cancelar Reserva</h2>
+    <form (ngSubmit)="onSubmit()" #cancelForm="ngForm" class="mt-8 space-y-6">
+      <div>
+        <label for="reservationId" class="block text-sm font-medium text-gray-700">ID de Reserva:</label>
+        <div class="mt-1">
+          <input type="text" id="reservationId" required [(ngModel)]="reservationId" name="reservationId"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+        </div>
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
+        <div class="mt-1">
+          <input type="email" id="email" required [(ngModel)]="email" name="email"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Cancelar Reserva
+        </button>
+      </div>
+    </form>
+    <p *ngIf="message" class="mt-6 text-center text-sm text-gray-600" [ngClass]="{ 'success': success, 'error': !success }">{{ message }}</p>
+  </div>
+</div>
