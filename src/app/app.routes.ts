@@ -30,7 +30,8 @@ export const routes: Routes = [
   },
   {
     path: 'auth-sign-up',
-    component: AuthSignUpComponent
+    component: AuthSignUpComponent,
+    canActivate: [RoleGuard],
   },
   {
     path: 'form-reservas',

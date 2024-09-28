@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import * as bcrypt from 'bcryptjs';
 import { RolesService } from '../../services/roles.service';
+import { RolesBdService } from '../../services/roles-bd.service';
 
 
 @Component({
   selector: 'app-roles',
   standalone: true,
   imports: [ CommonModule, ReactiveFormsModule ],
+  providers: [RolesService, RolesBdService],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.css'
 })
@@ -17,7 +19,7 @@ export class RolesComponent {
   roleForm: FormGroup;
   roles: any[] = [];
 
-  constructor(private fb: FormBuilder, private rolesService: RolesService) {
+  constructor(private fb: FormBuilder, private rolesService: RolesService, private rolesBdService: RolesBdService) {
 
     this.roleForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -67,5 +69,18 @@ export class RolesComponent {
       rol: role.rol
     });
 
+  }
+
+  insertarRolDB() {
+    if (this.roleForm.invalid) {
+      return;
+    }
+    this.rolesBdService.insertarUsuarioDB({
+      nombre: this.roleForm.value.nombre,
+      apellido: this.roleForm.value.apellido,
+      email: this.roleForm.value.email,
+      rol: this.roleForm.value.rol
+    });
+    this.roleForm.reset();
   }
 }

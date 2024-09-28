@@ -12,6 +12,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="rolesDBService.loading()">
+          <td colspan="9">Cargando...</td>
+        </tr>
         <tr *ngFor="let role of roles" class="border-b hover:bg-gray-50">
           <td class="p-4">{{ role.nombre }}</td>
           <td class="p-4">{{ role.apellido }}</td>
@@ -21,6 +24,9 @@
             <button (click)="openEditModal(role)" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400">Editar</button>
             <button (click)="onDelete(role.email)" class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-red-400">Eliminar</button>
           </td>
+        </tr>
+        <tr *ngIf="!rolesDBService.loading() && roles.length === 0">
+          <td colspan="9">No hay datos.</td>
         </tr>
       </tbody>
     </table>

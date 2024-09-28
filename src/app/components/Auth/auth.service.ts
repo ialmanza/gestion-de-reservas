@@ -51,12 +51,11 @@ import { RolesService } from './../../services/roles.service';
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '../../shared/data-acces/supabase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { RolesBdService } from '../../services/roles-bd.service';
 
 @Injectable({
   providedIn: 'root'
@@ -64,10 +63,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
 
+
   private authStateSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   authState: Observable<boolean> = this.authStateSubject.asObservable();
 
-  constructor(private rolesService: RolesService) {
+  constructor(private rolesService: RolesService, private rolesBdService: RolesBdService) {
 
   }
 
@@ -112,19 +112,23 @@ export class AuthService {
       const { data, error } = await this._supabaseClient.auth.signInWithPassword(credentials);
       if (error) throw error;
 
-      //Guarda el usuario como logueado y actualiza el estado
+      // Guarda el usuario como logueado y actualiza el estado
       localStorage.setItem('usuariologueado', 'true');
-      localStorage.setItem('currentUserEmail', data.user?.email ?? ''); // Guarda el email del usuario
+      localStorage.setItem('currentUserEmail', data.user?.email ?? '');
 
-      //Recupera el rol del usuario logueado (desde la base de datos o un endpoint)
-      const role = await this.fetchUserRole(data.user?.email!);  // Ver método fetchUserRole
-      localStorage.setItem('currentUserRole', role); // Guarda el rol del usuario
+      // Obtener y almacenar el rol del usuario
+      const role = await this.fetchUserRole(data.user?.email!);
+      if (role) {
+        localStorage.setItem('currentUserRole', role); // Guarda el rol del usuario
+      } else {
+        console.warn('No se encontró rol para el usuario');
+      }
 
       this.authStateSubject.next(true);
       return data;
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error('Error en el registro:', error.message);
+        console.error('Error en el inicio de sesión:', error.message);
         return { error };
       } else {
         console.error('Unknown error:', error);
@@ -132,6 +136,7 @@ export class AuthService {
       }
     }
   }
+
 
   //Cerrar sesión
   signOut(): void {
@@ -145,8 +150,9 @@ export class AuthService {
 
   //Obtener el rol del usuario desde una fuente externa
 
-  async fetchUserRole(email: string): Promise<string> {
-    return this.rolesService.getRoleByEmail(email).toPromise();
+  async fetchUserRole(email: string): Promise<string | null> {
+    return this.rolesBdService.getRoleByEmail(email);
   }
+
 }
 

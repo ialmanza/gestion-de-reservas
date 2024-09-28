@@ -1,24 +1,27 @@
 
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { RolesService } from '../../services/roles.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RolesBdService } from '../../services/roles-bd.service';
 
 @Component({
   selector: 'app-roles-table',
   standalone: true,
   templateUrl: './roles-table.component.html',
   imports: [ReactiveFormsModule, CommonModule],
+  providers: [RolesBdService],
   styleUrls: ['./roles-table.component.css']
 })
-export class RolesTableComponent implements OnInit {
+export class RolesTableComponent {
   roles: any[] = [];
   editRoleForm: FormGroup;
   @ViewChild('editModal') editModal!: TemplateRef<any>;
   selectedRole: any;
   isModalOpen = false;
+  rolesDBService = inject(RolesBdService);
 
-  constructor(private rolesService: RolesService, private fb: FormBuilder) {
+  constructor(private rolesService: RolesService, private fb: FormBuilder, private rolesBdService: RolesBdService) {
     this.editRoleForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -28,8 +31,7 @@ export class RolesTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.rolesService.getRoles().subscribe((roles) => {
+    this.rolesBdService.getRolesDB().then((roles : any[]) => {
       this.roles = roles;
     });
   }
@@ -66,3 +68,4 @@ export class RolesTableComponent implements OnInit {
   }
 
 }
+
