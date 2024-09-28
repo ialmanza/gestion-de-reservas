@@ -11,6 +11,9 @@ import { RoleChangePassComponent } from './components/roles-change-pass/role-cha
 import { CancelarReservacionComponent } from './components/reservaciones/cancelar-reservacion/cancelar-reservacion.component';
 import { RoleGuard } from './guards/role.guard';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { AdministradorFormComponent } from './components/administradores/administrador-form/administrador-form.component';
+import { ReservasListComponent } from './components/reservaciones/reservas-list/reservas-list.component';
 
 export const routes: Routes = [
   {
@@ -129,6 +132,22 @@ export const routes: Routes = [
     path: 'access-denied',
     component: AccessDeniedComponent // Crear un componente que muestre el mensaje de acceso denegado
   },
+  {
+    path: 'navigation',
+    component: NavigationComponent
+  },
+  {
+    path: 'administrador-form',
+    component: AdministradorFormComponent
+  },
+  {
+    path:"reservas-form",
+    component: FormReservasComponent
+  },
+  {
+    path: 'reservas-list',
+    component: ReservasListComponent
+  }
 
 
 

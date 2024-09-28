@@ -23,6 +23,8 @@ export class SidebarComponent {
   constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
 
+
+
   async logout() {
     await this._authService.signOut();
     this.router.navigate(['/admin']);

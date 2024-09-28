@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private apiUrl = 'https://maxipanza.com/reservas'; // Reemplazar  la URL de la API
+  private apiUrl = 'https://maxipanza.com/reservations/'; // Reemplazar  la URL de la API
 
   constructor(private http: HttpClient) { }
 

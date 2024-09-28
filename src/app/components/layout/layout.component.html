@@ -15,15 +15,39 @@
 </div> -->
 
 
-<div class="min-h-screen bg-gray-50/50">
+<!-- <div class="min-h-screen bg-gray-50/50">
   <app-sidebar></app-sidebar>
   <div class="p-4 xl:ml-80">
-    <!-- Nav -->
+
+    <nav class="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
+      <app-header></app-header>
+      <app-navigation></app-navigation>
+    </nav>
+
+
+    <div class="mt-12">
+      <router-outlet></router-outlet>
+    </div>
+
+
+    <div class="text-blue-gray-600 mt-12">
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div> -->
+
+<div class="min-h-screen flex bg-gray-50/50">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Content Area -->
+  <div class="flex-1 p-4 xl:ml-80">
+    <!-- Header -->
     <nav class="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
       <app-header></app-header>
     </nav>
 
-    <!-- Content -->
+    <!-- Main Content -->
     <div class="mt-12">
       <router-outlet></router-outlet>
     </div>

@@ -27,6 +27,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "emailjs": "^4.0.3",
     "flowbite": "^2.5.1",
     "resend": "^4.0.0",

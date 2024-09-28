@@ -22,7 +22,7 @@
     <div *ngIf="pasoActual === 2">
       <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Selecciona la fecha de la reserva</h2>
       <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="fechaSeleccionada"></mat-calendar>
+        <mat-calendar [(selected)]="reservation_date"></mat-calendar>
       </mat-card>
       <div class="flex justify-between mt-6">
         <button class="cancelar-button" (click)="retrocederPaso()">Atrás</button>
@@ -35,21 +35,21 @@
       <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Selecciona el tipo de comida</h2>
       <div class="flex items-center space-x-4">
         <button (click)="seleccionarTipoComida('almuerzo')"
-                [class.selected]="tipoComidaSeleccionada === 'almuerzo'"
+                [class.selected]="tipo_comida === 'almuerzo'"
                 class="tipo-comida-button">Almuerzo</button>
         <button (click)="seleccionarTipoComida('cena')"
-                [class.selected]="tipoComidaSeleccionada === 'cena'"
+                [class.selected]="tipo_comida === 'cena'"
                 class="tipo-comida-button">Cena</button>
       </div>
       <!-- Horarios según tipo de comida -->
-      <div *ngIf="tipoComidaSeleccionada" class="mt-4">
+      <div *ngIf="tipo_comida" class="mt-4">
         <h3 class="text-lg font-semibold leading-6 text-gray-900 mb-4">
-          Horarios disponibles para {{ tipoComidaSeleccionada }}
+          Horarios disponibles para {{ tipo_comida }}
         </h3>
         <div class="flex items-center space-x-4">
-          <button *ngFor="let horario of tipoComidaSeleccionada === 'almuerzo' ? horariosAlmuerzo : horariosCena"
+          <button *ngFor="let horario of tipo_comida === 'almuerzo' ? horariosAlmuerzo : horariosCena"
                   (click)="seleccionarHorario(horario)"
-                  [class.selected]="horarioSeleccionado === horario"
+                  [class.selected]="reservation_time === horario"
                   class="horario-button">
             {{ horario }}
           </button>
@@ -68,31 +68,31 @@
       <form [formGroup]="nameFormGroup">
         <mat-form-field>
           <mat-label>Nombre</mat-label>
-          <input matInput placeholder="Nombre" formControlName="nameCtrl" required>
+          <input matInput placeholder="Nombre" formControlName="first_name" required>
         </mat-form-field>
       </form>
       <form [formGroup]="apellidosFormGroup">
         <mat-form-field>
           <mat-label>Apellidos</mat-label>
-          <input matInput placeholder="Apellidos" formControlName="apellidosCtrl" required>
+          <input matInput placeholder="Apellidos" formControlName="last_name" required>
         </mat-form-field>
       </form>
       <form [formGroup]="emailFormGroup">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="emailCtrl" placeholder="Email" required>
+          <input matInput formControlName="email" placeholder="Email" required>
         </mat-form-field>
       </form>
       <form [formGroup]="telefonoFormGroup">
         <mat-form-field>
           <mat-label>Teléfono</mat-label>
-          <input matInput formControlName="telefonoCtrl" placeholder="Ex. 12345678" required>
+          <input matInput formControlName="phone_number" placeholder="Ex. 12345678" required>
         </mat-form-field>
       </form>
       <form [formGroup]="comentarioFormGroup">
         <mat-form-field>
           <mat-label>Comentarios</mat-label>
-          <input matInput formControlName="comentarioCtrl" placeholder="Comentarios">
+          <input matInput formControlName="special_requests" placeholder="Comentarios">
         </mat-form-field>
       </form>
       <div class="button-container">
@@ -105,14 +105,14 @@
     <div *ngIf="pasoActual === 5">
       <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Confirmar Reserva</h2>
       <p class="mb-2"><strong>Personas:</strong> {{ cantidadSeleccionada }}</p>
-      <p class="mb-2"><strong>Fecha:</strong> {{ fechaSeleccionada | date: 'fullDate' }}</p>
-      <p class="mb-2"><strong>Tipo de Comida:</strong> {{ tipoComidaSeleccionada }}</p>
-      <p class="mb-2"><strong>Horario:</strong> {{ horarioSeleccionado }}</p>
-      <p class="mb-2"><strong>Nombre:</strong> {{ nameFormGroup.get('nameCtrl')?.value }}</p>
-      <p class="mb-2"><strong>Apellidos:</strong> {{ apellidosFormGroup.get('apellidosCtrl')?.value }}</p>
-      <p class="mb-2"><strong>Email:</strong> {{ emailFormGroup.get('emailCtrl')?.value }}</p>
-      <p class="mb-2"><strong>Teléfono:</strong> {{ telefonoFormGroup.get('telefonoCtrl')?.value }}</p>
-      <p class="mb-4"><strong>Comentarios:</strong> {{ comentarioFormGroup.get('comentarioCtrl')?.value }}</p>
+      <p class="mb-2"><strong>Fecha:</strong> {{ reservation_date | date: 'fullDate' }}</p>
+      <p class="mb-2"><strong>Tipo de Comida:</strong> {{ tipo_comida }}</p>
+      <p class="mb-2"><strong>Horario:</strong> {{ reservation_time }}</p>
+      <p class="mb-2"><strong>Nombre:</strong> {{ nameFormGroup.get('first_name')?.value }}</p>
+      <p class="mb-2"><strong>Apellidos:</strong> {{ apellidosFormGroup.get('last_name')?.value }}</p>
+      <p class="mb-2"><strong>Email:</strong> {{ emailFormGroup.get('email')?.value }}</p>
+      <p class="mb-2"><strong>Teléfono:</strong> {{ telefonoFormGroup.get('phone_number')?.value }}</p>
+      <p class="mb-4"><strong>Comentarios:</strong> {{ comentarioFormGroup.get('special_requests')?.value }}</p>
 
       <div class="button-container">
         <button class="cancelar-button" (click)="reiniciarFormulario()">Cancelar</button>

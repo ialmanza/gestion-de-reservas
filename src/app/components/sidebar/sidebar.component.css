@@ -1,0 +1,76 @@
+@import 'tailwindcss/tailwind.css';
+
+/* Overlay hidden by default */
+.hidden {
+  display: none;
+}
+
+/* Overlay when visible */
+#drawer-overlay {
+  transition: opacity 0.3s ease;
+}
+
+
+.custom-button {
+  background-color: transparent; /* Quita el fondo */
+  color: blue; /* Color del texto */
+  border: none; /* Quita el borde */
+  outline: none; /* Quita el contorno */
+  font-size: 18px;
+}
+
+.custom-button:hover {
+  color: black; /* Color del texto al pasar el mouse */
+}
+
+
+/* Drawer visible class */
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+/* Hover area */
+#drawer-hover-area {
+  background: transparent;
+}
+
+/* Drawer hidden class (default) */
+.drawer-hidden {
+  transform: translateX(-100%);
+}
+
+/* Drawer visible class */
+.drawer-visible {
+  transform: translateX(0);
+}
+
+
+
+.sidebar-container {
+  width: 16rem; /* Ajusta el ancho del sidebar */
+  background-color: #1f2937; /* Color de fondo */
+  color: white; /* Color del texto */
+  transition: transform 0.3s ease; /* Transición suave */
+}
+
+.sidebar-container.open {
+  transform: translateX(0); /* Sidebar visible */
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

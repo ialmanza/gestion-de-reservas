@@ -13,12 +13,11 @@ import { ReservasService } from '../../services/reservas.service';
 import { Router } from '@angular/router';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
-
 import {ChangeDetectionStrategy, model} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import emailjs from '@emailjs/browser';
-import { Resend } from 'resend';
+import { DataService } from '../../services/data-service.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-form-reservas',
@@ -26,43 +25,45 @@ import { Resend } from 'resend';
   imports: [ MatButtonModule, MatFormFieldModule, MatInputModule, MatStepperModule, FormsModule,
              ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ReservasService, provideNativeDateAdapter()],
+  providers: [ReservasService, provideNativeDateAdapter(), DataService],
   templateUrl: './form-reservas.component.html',
   styleUrl: './form-reservas.component.css'
 })
 export class FormReservasComponent {
   personas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   cantidadSeleccionada: number | null = null;
-  fechaSeleccionada: any;
-  tipoComidaSeleccionada: string | null = null;
-  horarioSeleccionado: string | null = null;
+  reservation_date: string | null = null;
+  tipo_comida: string | null = null;
+  reservation_time: string | null = null;
   horariosAlmuerzo = ['11:00 AM', '12:00 PM', '1:00 PM'];
   horariosCena = ['7:00 PM', '8:00 PM', '9:00 PM'];
   selected = model<Date | null>(null);
   pasoActual: number = 1;
   id_email: string = '';
+  now = new Date();
+
 
   private _formBuilder = inject(FormBuilder);
 
   nameFormGroup = this._formBuilder.group({
-    nameCtrl: ['', Validators.required],
+    first_name: ['', Validators.required],
   });
   apellidosFormGroup = this._formBuilder.group({
-    apellidosCtrl: ['', Validators.required],
+    last_name: ['', Validators.required],
   })
   comentarioFormGroup = this._formBuilder.group({
-    comentarioCtrl: [''],
+    special_requests: [''],
   })
   emailFormGroup = this._formBuilder.group({
-    emailCtrl: ['', Validators.required],
+    email: ['', Validators.required],
   });
   telefonoFormGroup = this._formBuilder.group({
-    telefonoCtrl: ['', Validators.required],
+    phone_number: ['', Validators.required],
   });
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor( private reservasService: ReservasService, private router: Router)
+  constructor( private reservasService: ReservasService, private router: Router, private dataService: DataService)
    {
     const breakpointObserver = inject(BreakpointObserver);
 
@@ -77,34 +78,43 @@ export class FormReservasComponent {
     this.id_email = id;
 
     // Obtener valores de los FormGroups
-    const nombre = this.nameFormGroup.get('nameCtrl')?.value as string;
-    const apellidos = this.apellidosFormGroup.get('apellidosCtrl')?.value as string;
-    const email = this.emailFormGroup.get('emailCtrl')?.value as string;
-    const telefono= this.telefonoFormGroup.get('telefonoCtrl')?.value as string;
-    const observaciones = this.comentarioFormGroup.get('comentarioCtrl')?.value as string;
+    const first_name = this.nameFormGroup.get('first_name')?.value as string;
+    const last_name = this.apellidosFormGroup.get('last_name')?.value as string;
+    const email = this.emailFormGroup.get('email')?.value as string;
+    const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
+    const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
 
 
 
-    this.reservasService.addReserva({
+    //this.reservasService.addReserva({
+    this.dataService.createItem({
       id,
-      nombre,
-      apellidos,
+      first_name,
+      last_name,
       email,
-      observaciones,
-      tipo_comida: this.tipoComidaSeleccionada!,
-      horario: this.horarioSeleccionado!,
-      telefono,
+      special_requests,
+      tipo_comida: this.tipo_comida!,
+      reservation_time: this.reservation_time = format(this.now, 'HH:mm:ss.SSS'),
+      reservation_date: this.reservation_date = format(this.now, 'yyyy-MM-dd'),
+      chairs_needed: this.cantidadSeleccionada!,
+      phone_number,
       hide: true
-    });
 
-
-    //this.sendByResend();
-    this.reiniciarFormulario();
+    }).subscribe(
+      response => {
+        console.log('Reserva añadida exitosamente:', response);
+        this.reiniciarFormulario();
+      },
+      error => {
+        console.error('Error al añadir la reserva:', error);
+        // Aquí puedes agregar un mensaje de error para el usuario
+      }
+    );
   }
 
   cerrar() {
     if (this.nameFormGroup.valid && this.apellidosFormGroup.valid && this.emailFormGroup.valid
-      && this.cantidadSeleccionada !== null && this.horarioSeleccionado !== null) {
+      && this.cantidadSeleccionada !== null && this.reservation_time !== null) {
 
       this.adicionarReserva();
 
@@ -121,12 +131,12 @@ export class FormReservasComponent {
 
 
   seleccionarTipoComida(tipo: string) {
-    this.tipoComidaSeleccionada = tipo;
-    this.horarioSeleccionado = null;
+    this.tipo_comida = tipo;
+    this.reservation_time = null;
   }
 
   seleccionarHorario(horario: string) {
-    this.horarioSeleccionado = horario;
+    this.reservation_time = horario;
     console.log('Horario seleccionado:', horario);
   }
 
@@ -148,9 +158,9 @@ export class FormReservasComponent {
     this.emailFormGroup.reset();
     this.comentarioFormGroup.reset();
     this.cantidadSeleccionada = null;
-    this.horarioSeleccionado = null;
-    this.fechaSeleccionada = null;
-    this.tipoComidaSeleccionada = null;
+    this.reservation_time = null;
+    this.reservation_date = null;
+    this.tipo_comida = null;
     this.telefonoFormGroup.reset();
     this.pasoActual = 1;
   }
