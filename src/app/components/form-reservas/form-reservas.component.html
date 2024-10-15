@@ -6,16 +6,29 @@
     <div *ngIf="pasoActual === 1">
 
       <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Selecciona la cantidad de personas</h2>
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4 justify-center">
         <button *ngFor="let num of personas" (click)="seleccionarPersonas(num)"
                 [class.selected]="num === cantidadSeleccionada"
                 class="circle-button">
           {{ num }}
         </button>
       </div>
-      <div class="flex justify-between mt-6">
-        <button class="confirmar-button" (click)="avanzarPaso()">Siguiente</button>
+
+      <div class="flex flex-col items-center justify-center mt-6">
+        <div class="flex items-center justify-center">
+          <button (click)="decrementarPersonas()" class="circle-button">-</button>
+
+          <input type="number" [(ngModel)]="cantidadSeleccionada"
+           class="mx-4 w-20 text-center border rounded no-arrows"
+           (input)="actualizarCantidad()" />
+
+          <button (click)="incrementarPersonas()" class="circle-button">+</button>
+        </div>
+        <div class="mt-6">
+          <button class="confirmar-button" (click)="avanzarPaso()">Siguiente</button>
+        </div>
       </div>
+
     </div>
 
     <!-- Seleccionar Fecha -->

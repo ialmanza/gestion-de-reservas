@@ -5,12 +5,14 @@ import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } 
 import { Reserva } from '../../../models/Ireserva';
 import { MatDialog} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { DataService } from '../../../services/data-service.service';
 
 
 @Component({
   selector: 'app-reserva-nueva',
   standalone: true,
   imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule],
+  providers: [ReservasService, DataService],
   templateUrl: './reserva-nueva.component.html',
   styleUrl: './reserva-nueva.component.css'
 })
@@ -22,7 +24,7 @@ export class ReservaNuevaComponent {
   editForm: FormGroup;
 
 
-  constructor( private reservasService: ReservasService, private dialog: MatDialog, private fb: FormBuilder) {
+  constructor( private reservasService: ReservasService, private dialog: MatDialog, private fb: FormBuilder, private dataService: DataService) {
     this.editForm = this.fb.group({
       id: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -58,9 +60,12 @@ export class ReservaNuevaComponent {
       this.closeModal();
     }
   }
+
   deleteReserva(reservas : Reserva) {
     if(confirm('Está seguro que desea borrar esta reserva?')) {
-      this.reservasService.deleteReserva(reservas.id);
+      console.log(typeof reservas.id, reservas.id);
+      //this.reservasService.deleteReserva(reservas.id);
+      this.dataService.deleteItem(parseInt(reservas.id));
     }
   }
 

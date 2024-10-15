@@ -31,7 +31,7 @@ import { format } from 'date-fns';
 })
 export class FormReservasComponent {
   personas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  cantidadSeleccionada: number | null = null;
+  cantidadSeleccionada: number | null = 1;
   reservation_date: string | null = null;
   tipo_comida: string | null = null;
   reservation_time: string | null = null;
@@ -165,6 +165,25 @@ export class FormReservasComponent {
     this.pasoActual = 1;
   }
 
+  incrementarPersonas() {
+    if (this.cantidadSeleccionada === null) {
+      this.cantidadSeleccionada = 1;
+    } else if (this.cantidadSeleccionada < 1000) {
+      this.cantidadSeleccionada++;
+    }
+  }
+
+  decrementarPersonas() {
+    if (this.cantidadSeleccionada === null || this.cantidadSeleccionada > 1) {
+      this.cantidadSeleccionada = this.cantidadSeleccionada ? this.cantidadSeleccionada - 1 : 1;
+    }
+  }
+
+  actualizarCantidad(): void {
+    if (this.cantidadSeleccionada! < 1) {
+      this.cantidadSeleccionada = 1; // Evitar que sea menor a 1
+    }
+  }
 
   //EN DESARROLLO
 //     async send(){
