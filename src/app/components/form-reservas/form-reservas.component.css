@@ -204,3 +204,120 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 .cancelar-button:hover {
   background-color: #e04343;
 }
+
+
+/* Estilos generales para la pasarela de pago */
+.payment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos y subtítulos */
+.payment-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #32325d;
+}
+
+.payment-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #525f7f;
+}
+
+/* Estilo de los campos de entrada */
+.payment-input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccd0d5;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #32325d;
+}
+
+.payment-input:focus {
+  border-color: #6772e5;
+  box-shadow: 0 0 0 2px rgba(103, 114, 229, 0.2);
+  outline: none;
+}
+
+/* Estilos del botón de pago */
+.payment-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6772e5;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.payment-button:hover {
+  background-color: #5469d4;
+}
+
+/* Estilos para los radios y checkbox */
+.payment-radio,
+.payment-checkbox {
+  margin-right: 8px;
+}
+
+.payment-label {
+  font-size: 16px;
+  color: #525f7f;
+}
+
+/* Contenedor para el tipo de tarjeta */
+.card-type-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+/* Iconos de tarjetas */
+.card-icon {
+  width: 40px;
+  height: auto;
+}
+
+/* Contenedor de errores */
+.payment-error {
+  color: #e63946;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Estilos para el contenedor de banco */
+.bank-details-container {
+  margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .payment-container {
+    padding: 16px;
+  }
+
+  .payment-title {
+    font-size: 20px;
+  }
+
+  .payment-subtitle {
+    font-size: 16px;
+  }
+
+  .payment-button {
+    font-size: 16px;
+  }
+}

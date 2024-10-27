@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, inject,ChangeDetectorRef, AfterViewInit } from '@angular/core'
+import { Component, inject,ChangeDetectorRef } from '@angular/core'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
-import { AuthSession } from '@supabase/supabase-js'
 import { ReactiveFormsModule } from '@angular/forms'
 import { AuthService } from '../Auth/auth.service'
 import { Router } from '@angular/router'

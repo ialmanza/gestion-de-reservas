@@ -20,12 +20,14 @@ import { DataService } from '../../services/data-service.service';
 import { format } from 'date-fns';
 import { Reserva } from '../../models/Ireserva';
 import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserva-details.component";
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-form-reservas',
   standalone: true,
   imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatStepperModule, FormsModule,
-    ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule, ReservaDetailsComponent],
+    ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule, ReservaDetailsComponent,
+    MatSelectModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ReservasService, provideNativeDateAdapter(), DataService],
   templateUrl: './form-reservas.component.html',
@@ -45,6 +47,7 @@ export class FormReservasComponent {
   now = new Date();
   reservas : Reserva[];
   ultimaReservaConfirmada: Reserva | null = null;
+  paymentForm: FormGroup;
 
 
   private _formBuilder = inject(FormBuilder);
@@ -69,6 +72,14 @@ export class FormReservasComponent {
 
   constructor( private reservasService: ReservasService, private router: Router, private dataService: DataService)
    {
+    this.paymentForm = this._formBuilder.group({
+      //cardType: ['', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
+      cardHolderName: ['', Validators.required],
+      bankName: ['', Validators.required]
+    });
     const breakpointObserver = inject(BreakpointObserver);
     this.reservas = [];
     this.stepperOrientation = breakpointObserver
@@ -153,8 +164,25 @@ export class FormReservasComponent {
     console.log('Horario seleccionado:', horario);
   }
 
+  calcularTotal(): number {
+    return (this.cantidadSeleccionada || 0) * 3000;
+  }
+
+  procesarPago() {
+    if (this.paymentForm.valid) {
+      const paymentData = this.paymentForm.value;
+      console.log('Datos del Pago:', paymentData);
+      console.log('Total a pagar:', this.calcularTotal());
+
+      // Aquí podrías simular un proceso de pago o enviar los datos a un servicio
+      this.avanzarPaso();
+    } else {
+      console.log('Formulario de pago no es válido.');
+    }
+  }
+
   avanzarPaso() {
-    if (this.pasoActual < 7) {
+    if (this.pasoActual < 8) {
       this.pasoActual++;
     }
   }
@@ -163,7 +191,7 @@ export class FormReservasComponent {
     if (this.pasoActual > 1) {
       this.pasoActual--;
     }
-    if (this.pasoActual === 6) {
+    if (this.pasoActual === 7) {
       this.cerrarYMostrarDetalles();
     }
   }
