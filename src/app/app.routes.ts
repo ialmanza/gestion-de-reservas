@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ReservaComponent } from './components/reservaciones/reservas-form/reserva.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { AuthSignUpComponent } from './components/auth-sign-up/auth-sign-up.component';
 import { privateGuard } from './shared/guards/auth.guards';
@@ -14,6 +13,9 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AdministradorFormComponent } from './components/administradores/administrador-form/administrador-form.component';
 import { ReservasListComponent } from './components/reservaciones/reservas-list/reservas-list.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ReservaDetailsComponent } from './components/reservaciones/reserva-details/reserva-details.component';
+import { PoliticPrivacidadComponent } from './components/politic-privacidad/politic-privacidad.component';
 
 export const routes: Routes = [
   {
@@ -25,10 +27,6 @@ export const routes: Routes = [
     component: AuthLoginComponent,
   },
   {
-    path: 'auth-login',
-    component: AuthLoginComponent
-  },
-  {
     path: 'auth-sign-up',
     component: AuthSignUpComponent,
     canActivate: [RoleGuard],
@@ -37,33 +35,13 @@ export const routes: Routes = [
     path: 'form-reservas',
     component: FormReservasComponent,
   },
-  // {
-  //   path: 'listar-reservas',
-  //   loadComponent: () => ReservasListComponent,
-
-  // },
-
-  // {
-  //   path: 'sidebar',
-  //   loadComponent: () => SidebarComponent,
-  // },
-  {
-    path: 'reserva',
-    loadComponent: () => ReservaComponent,
-  },
-
-
 
    {
     path: 'layout',
     component: LayoutComponent,
     canActivate: [privateGuard],
     children: [
-      {
-        path: 'reserva',
-        loadComponent: () => import('./components/reservaciones/reservas-form/reserva.component').then(m => m.ReservaComponent),
 
-      },
       {
         path: 'dashboard',
         loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
@@ -72,11 +50,6 @@ export const routes: Routes = [
       {
         path: 'reservas-list',
         loadComponent: () => import('./components/reservaciones/reservas-list/reservas-list.component').then(m => m.ReservasListComponent),
-
-      },
-      {
-        path:'register',
-        loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent),
 
       },
       {
@@ -107,6 +80,7 @@ export const routes: Routes = [
         path: 'cancelar-reservacion',
         loadComponent: () => import('./components/reservaciones/cancelar-reservacion/cancelar-reservacion.component').then(m => m.CancelarReservacionComponent),
        },
+
     ]
    },
 
@@ -148,7 +122,20 @@ export const routes: Routes = [
   {
     path: 'reservas-list',
     component: ReservasListComponent
-  }
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'reserva-details',
+    component: ReservaDetailsComponent
+  },
+  {
+    path: 'politica-privacidad',
+    component: PoliticPrivacidadComponent
+  },
+
 
 
 

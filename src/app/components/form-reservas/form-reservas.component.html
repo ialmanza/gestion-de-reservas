@@ -2,6 +2,7 @@
 <div class="container">
 
   <div class="border rounded-lg shadow-md p-6 bg-white">
+    <!-- < class="border rounded-lg shadow-md p-6" style="background-color: rgba(255, 255, 255, 0.8);"> PARA BAJARLE LA OPACIDAD AL CARD, EN PROCESO-->
     <!-- Cantidad de Personas -->
     <div *ngIf="pasoActual === 1">
 
@@ -132,6 +133,22 @@
         <button class="confirmar-button" (click)="adicionarReserva()">Confirmar Reserva</button>
       </div>
     </div>
+
+    <!-- Reserva finalizada -->
+    <div *ngIf="pasoActual === 6" class="reservation-container">
+      <h2 class="reservation-title">Datos de Reserva</h2>
+      <div class="reservation-details">
+        <p><span class="reservation-label">Horario:</span> {{ reservation_time }}</p>
+        <p><span class="reservation-label">Fecha:</span> {{ reservation_date | date: 'fullDate' }}</p>
+        <p><span class="reservation-label">Personas:</span> {{ cantidadSeleccionada }}</p>
+        <p><span class="reservation-label">Tipo de Comida:</span> {{ tipo_comida }}</p>
+      </div>
+      <div class="button-container">
+        <button class="cancelar-button" (click)="reiniciarFormulario()">Inicio</button>
+      </div>
+    </div>
   </div>
 </div>
+
+
 

@@ -14,6 +14,7 @@ import { DataService } from '../../../services/data-service.service';
   templateUrl: './reservas-list.component.html',
   styleUrl: './reservas-list.component.css'
 })
+
 export class ReservasListComponent {
   reservas : Reserva[];
   filteredReservas: Reserva[] = [];

@@ -1,41 +1,43 @@
-<div class="role-form-container p-8 bg-gray-100 rounded-lg shadow-md max-w-md mx-auto mt-10">
-  <h2 class="text-2xl font-semibold text-center mb-6">Agregar Usuario</h2>
-  <form (ngSubmit)="insertarRolDB()" [formGroup]="roleForm" class="space-y-4">
-    <div>
-      <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
-      <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="nombre" type="text" formControlName="nombre" required>
-    </div>
+<div class="container">
+  <div class="role-form-container p-8 bg-gray-100 rounded-lg shadow-md max-w-md mx-auto mt-10">
+    <h2 class="text-2xl font-semibold text-center mb-6">Agregar Usuario</h2>
+    <form (ngSubmit)="insertarRolDB()" [formGroup]="roleForm" class="space-y-4">
+      <div>
+        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="nombre" type="text" formControlName="nombre" required>
+      </div>
 
-    <div>
-      <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido:</label>
-      <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="apellido" type="text" formControlName="apellido" required>
-    </div>
+      <div>
+        <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido:</label>
+        <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="apellido" type="text" formControlName="apellido" required>
+      </div>
 
-    <div>
-      <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
-      <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="email" type="email" formControlName="email" required>
-    </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+        <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="email" type="email" formControlName="email" required>
+      </div>
 
-    <div>
-      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
-      <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="password" type="password" formControlName="password" required>
-    </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
+        <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="password" type="password" formControlName="password" required>
+      </div>
 
-    <div>
-      <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Contraseña:</label>
-      <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="confirmPassword" type="password" formControlName="confirmPassword" required>
-    </div>
+      <div>
+        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Contraseña:</label>
+        <input class="form-control border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" id="confirmPassword" type="password" formControlName="confirmPassword" required>
+      </div>
 
-    <div>
-      <label for="rol" class="block text-sm font-medium text-gray-700">Puesto:</label>
-      <select id="rol" formControlName="rol" class="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-        <option value="administrador">Administrador</option>
-        <option value="recepcionista">Recepcionista</option>
-      </select>
-    </div>
+      <div>
+        <label for="rol" class="block text-sm font-medium text-gray-700">Puesto:</label>
+        <select id="rol" formControlName="rol" class="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="administrador">Administrador</option>
+          <option value="recepcionista">Recepcionista</option>
+        </select>
+      </div>
 
-    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500" [disabled]="roleForm.invalid">Agregar Usuario</button>
-  </form>
+      <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500" [disabled]="roleForm.invalid">Agregar Usuario</button>
+    </form>
 
+  </div>
 </div>
 

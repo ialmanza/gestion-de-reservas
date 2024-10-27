@@ -18,19 +18,21 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DataService } from '../../services/data-service.service';
 import { format } from 'date-fns';
+import { Reserva } from '../../models/Ireserva';
+import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserva-details.component";
 
 @Component({
   selector: 'app-form-reservas',
   standalone: true,
-  imports: [ MatButtonModule, MatFormFieldModule, MatInputModule, MatStepperModule, FormsModule,
-             ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, MatStepperModule, FormsModule,
+    ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule, ReservaDetailsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ReservasService, provideNativeDateAdapter(), DataService],
   templateUrl: './form-reservas.component.html',
   styleUrl: './form-reservas.component.css'
 })
 export class FormReservasComponent {
-  personas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  personas = [1, 2, 3, 4, 5];
   cantidadSeleccionada: number | null = 1;
   reservation_date: string | null = null;
   tipo_comida: string | null = null;
@@ -41,6 +43,8 @@ export class FormReservasComponent {
   pasoActual: number = 1;
   id_email: string = '';
   now = new Date();
+  reservas : Reserva[];
+  ultimaReservaConfirmada: Reserva | null = null;
 
 
   private _formBuilder = inject(FormBuilder);
@@ -66,7 +70,7 @@ export class FormReservasComponent {
   constructor( private reservasService: ReservasService, private router: Router, private dataService: DataService)
    {
     const breakpointObserver = inject(BreakpointObserver);
-
+    this.reservas = [];
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -83,8 +87,6 @@ export class FormReservasComponent {
     const email = this.emailFormGroup.get('email')?.value as string;
     const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
     const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
-
-
 
     //this.reservasService.addReserva({
     this.dataService.createItem({
@@ -103,14 +105,25 @@ export class FormReservasComponent {
     }).subscribe(
       response => {
         console.log('Reserva añadida exitosamente:', response);
+
+        // Guarda el ID de la reserva generada
+        localStorage.setItem('ultimaReservaId', response.id);
+
+        // Muestra un mensaje de éxito
+        alert('Reserva agregada correctamente. Ver detalles.');
+
+        // Cierra el formulario
         this.reiniciarFormulario();
       },
       error => {
         console.error('Error al añadir la reserva:', error);
-        // Aquí puedes agregar un mensaje de error para el usuario
+        // Mostrar mensaje de error al usuario
       }
     );
+
+    this.avanzarPaso();
   }
+
 
   cerrar() {
     if (this.nameFormGroup.valid && this.apellidosFormGroup.valid && this.emailFormGroup.valid
@@ -141,7 +154,7 @@ export class FormReservasComponent {
   }
 
   avanzarPaso() {
-    if (this.pasoActual < 5) {
+    if (this.pasoActual < 7) {
       this.pasoActual++;
     }
   }
@@ -149,6 +162,9 @@ export class FormReservasComponent {
   retrocederPaso() {
     if (this.pasoActual > 1) {
       this.pasoActual--;
+    }
+    if (this.pasoActual === 6) {
+      this.cerrarYMostrarDetalles();
     }
   }
 
@@ -185,30 +201,31 @@ export class FormReservasComponent {
     }
   }
 
-  //EN DESARROLLO
-//     async send(){
-//       emailjs.init('okEjA9dn2w_9EpoeX');
-//       let response = await emailjs.send("service_bu227zg","template_7u644ss",{
-//         from_name: "Reservaciones",
-//         to_name: this.nameFormGroup.value.nameCtrl ,
-//         reply_to: this.emailFormGroup.value.emailCtrl,
-//         message: "Gracias por tu reserva, su identificación es" + this.id_email,
-//         });
-//         console.log(response);
-//         console.log("El correo se envió correctamente");
-//         alert("El correo se envió correctamente");
-//   }
 
-//     sendByResend() {
-//       const resend = new Resend('re_Pe6qVeXq_Cau3WSeqGk4DhsbMBxuUiUkt');
+// getReservConfirm() {
+//   this.dataService.getItems().subscribe((reservas: Reserva[]) => {
+//     this.reservas = reservas;
 
-//       resend.emails.send({
-//         from: 'reservaciones.desarrolloweb@gmail.com',
-//         to: this.emailFormGroup.value.emailCtrl!,
-//         subject: 'Reservación confirmada',
-//         html: '<p>Su código de reserva es <strong>' + this.id_email + '</strong>!</p>'
-//       });
-//       console.log("El correo se envió correctamente");
+//     const ultimaReserva = this.reservas[this.reservas.length - 1];
+
+//     if (ultimaReserva) {
+//       this.ultimaReservaConfirmada = ultimaReserva;
+
+//       this.reservation_time = ultimaReserva.horario;
 //     }
+//   });
+// }
 
- }
+cerrarYMostrarDetalles() {
+  this.reiniciarFormulario();
+  const ultimaReservaId = localStorage.getItem('ultimaReservaId');
+
+  if (ultimaReservaId) {
+    this.router.navigate(['/reserva-details/', ultimaReservaId]);
+  } else {
+    console.error('No se encontró un ID de reserva en el localStorage');
+    // Puedes mostrar un mensaje al usuario o manejar el caso de otra forma.
+  }
+}
+
+}

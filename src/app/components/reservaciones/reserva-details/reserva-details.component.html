@@ -1,0 +1,23 @@
+<div *ngIf="lastReserva; else noReserva">
+  <h2>Última Reserva Generada</h2>
+  <p><strong>Nombre:</strong> {{ lastReserva.nombre }}</p>
+  <p><strong>Apellidos:</strong> {{ lastReserva.apellidos }}</p>
+  <p><strong>Email:</strong> {{ lastReserva.email }}</p>
+  <p><strong>Teléfono:</strong> {{ lastReserva.telefono }}</p>
+  <p><strong>Horario:</strong> {{ lastReserva.horario }}</p>
+  <p><strong>Tipo de Comida:</strong> {{ lastReserva.tipo_comida }}</p>
+  <p><strong>Observaciones:</strong> {{ lastReserva.observaciones }}</p>
+  <p *ngIf="lastReserva.codigo_reserva"><strong>Código de Reserva:</strong> {{ lastReserva.codigo_reserva }}</p>
+</div>
+<ng-template #noReserva>
+  <p>No se ha encontrado ninguna reserva.</p>
+</ng-template>
+
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>
+
+<div class="button-container">
+  <button class="cancelar-button" (click)="reiniciarFormulario()">Inicio</button>
+</div>
+

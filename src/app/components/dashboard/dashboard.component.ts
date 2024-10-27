@@ -10,9 +10,9 @@ import 'flowbite';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-  totalReservas: number = 10; // Simulación de datos
+  totalReservas: number = 10;
   reservasDelDia = [{ nombre: 'Juan', hora: '19:00' }, { nombre: 'Ana', hora: '20:00' }];
-  totalClientes: number = 100; // Simulación de datos
-  clientesFrecuentes: number = 25; // Simulación de datos
+  totalClientes: number = 100;
+  clientesFrecuentes: number = 25;
   notificaciones = ['Cambio de horario el próximo sábado.', 'Nuevo menú disponible.'];
 }

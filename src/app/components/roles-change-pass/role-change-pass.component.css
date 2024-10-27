@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  background-image: url("https://wallpaperaccess.com/full/767390.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

@@ -56,16 +56,31 @@ export class ReservaNuevaComponent {
   onSubmitEdit() {
     if (this.editForm.valid) {
       const updatedReserva = this.editForm.value;
-      this.reservasService.updateReserva(updatedReserva);
+      this.dataService.updateItem(updatedReserva.id, updatedReserva);
       this.closeModal();
     }
   }
 
-  deleteReserva(reservas : Reserva) {
-    if(confirm('Está seguro que desea borrar esta reserva?')) {
-      console.log(typeof reservas.id, reservas.id);
-      //this.reservasService.deleteReserva(reservas.id);
-      this.dataService.deleteItem(parseInt(reservas.id));
+  // deleteReserva(reservas : Reserva) {
+  //   if(confirm('Está seguro que desea borrar esta reserva?')) {
+  //     console.log(typeof reservas.id, reservas.id);
+
+  //     this.dataService.deleteItem(parseInt(reservas.id));
+  //     console.log(typeof reservas.id);
+  //   }
+  // }
+
+  deleteReserva(reservas: Reserva) {
+    if (confirm('¿Está seguro que desea borrar esta reserva?')) {
+      const reservaId = typeof reservas.id === 'number' ? reservas.id : parseInt(reservas.id, 10);
+
+      if (!isNaN(reservaId)) {
+        console.log(typeof reservaId, reservaId);
+        this.dataService.deleteItem(reservaId);
+        console.log(typeof reservaId);
+      } else {
+        console.error('El ID de la reserva no es un número válido:', reservas.id);
+      }
     }
   }
 

@@ -1,20 +1,24 @@
-<div class="estadisticas-clientes">
-  <h2>Estadísticas de Clientes</h2>
-  <p>Total de Clientes: {{ totalClientes }}</p>
-  <p>Clientes Frecuentes: {{ clientesFrecuentes }}</p>
+<div class="container">
+  <div class="estadisticas-clientes">
+    <h2>Estadísticas de Clientes</h2>
+    <p>Total de Clientes: {{ totalClientes }}</p>
+    <p>Clientes Frecuentes: {{ clientesFrecuentes }}</p>
+  </div>
+
+  <div class="reservas-resumen">
+    <h2>Resumen de Reservas del Día</h2>
+    <p>Total de Reservas: {{ totalReservas }}</p>
+    <ul>
+      <li *ngFor="let reserva of reservasDelDia">{{ reserva.nombre }} - {{ reserva.hora }}</li>
+    </ul>
+  </div>
+
+  <div class="notificaciones">
+    <h2>Notificaciones Importantes</h2>
+    <ul>
+      <li *ngFor="let notificacion of notificaciones">{{ notificacion }}</li>
+    </ul>
+  </div>
 </div>
 
-<div class="reservas-resumen">
-  <h2>Resumen de Reservas del Día</h2>
-  <p>Total de Reservas: {{ totalReservas }}</p>
-  <ul>
-    <li *ngFor="let reserva of reservasDelDia">{{ reserva.nombre }} - {{ reserva.hora }}</li>
-  </ul>
-</div>
 
-<div class="notificaciones">
-  <h2>Notificaciones Importantes</h2>
-  <ul>
-    <li *ngFor="let notificacion of notificaciones">{{ notificacion }}</li>
-  </ul>
-</div>

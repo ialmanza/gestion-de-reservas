@@ -1,3 +1,5 @@
+
+
 .form-group {
   display: flex;
   justify-content: center;
@@ -14,6 +16,7 @@ input[type="text"] {
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
 }
+
 
 input[type="text"]:focus {
   border-color: #007bff;

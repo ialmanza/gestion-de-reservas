@@ -8,4 +8,5 @@ export interface Reserva {
   horario: string;
   telefono: string;
   hide: boolean;
+  codigo_reserva?: string
 }

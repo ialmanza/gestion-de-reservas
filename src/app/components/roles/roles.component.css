@@ -1,5 +1,15 @@
 
-
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  background-image: url("https://www.wallpapertip.com/wmimgs/89-895983_food-4k.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .form-card {
   max-width: 800px;
   margin: 0 auto;

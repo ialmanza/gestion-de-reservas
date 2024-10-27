@@ -16,17 +16,7 @@ export class NavigationComponent {
 
 
   ngOnInit(): void {
-    // Selecciona el botón de alternancia del menú y el contenedor del menú
-    const menuToggle = document.getElementById('menu-toggle');
-    const navbarMenu = document.getElementById('navbar-multi-level');
 
-    // Verifica si ambos elementos existen
-    if (menuToggle && navbarMenu) {
-      // Agrega un event listener al botón para alternar la clase 'hidden' del menú
-      menuToggle.addEventListener('click', () => {
-        navbarMenu.classList.toggle('hidden');
-      });
-    }
   }
 
 
