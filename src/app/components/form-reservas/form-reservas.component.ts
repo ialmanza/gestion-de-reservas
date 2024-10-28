@@ -120,9 +120,6 @@ export class FormReservasComponent {
         // Guarda el ID de la reserva generada
         localStorage.setItem('ultimaReservaId', response.id);
 
-        // Muestra un mensaje de éxito
-        alert('Reserva agregada correctamente. Ver detalles.');
-
         // Cierra el formulario
         this.reiniciarFormulario();
       },
