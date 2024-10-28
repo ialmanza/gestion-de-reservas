@@ -178,12 +178,12 @@
           <!-- Botón de pago -->
 
           <!-- Use the template reference variable in your *ngIf directive -->
-          <button *ngIf="!paymentForm.valid; else noForm" class="payment-button" (click)="procesarPago()">Pagar ahora</button>
+          <button  class="payment-button" (click)="procesarPago()">Pagar ahora</button>
 
-          <ng-template #noForm>
-            <!-- Your template for when paymentForm is invalid -->
+          <!-- <ng-template #noForm>
+            *ngIf="paymentForm.valid; else noForm"
             <p class="error-message">Error en los datos</p>
-          </ng-template>
+          </ng-template> -->
 
           <!-- Mensaje de error -->
           <p class="payment-error" style="display: none;">Ingrese un número de tarjeta válido.</p>
