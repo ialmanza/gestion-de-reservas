@@ -1,0 +1,74 @@
+<!-- home.component.html -->
+<header>
+  <img src="https://res.cloudinary.com/df8slw80p/image/upload/v1730076302/ten_hag-removebg-preview_k4zzll.png" alt="Logo Ten Hag" class="logo" />
+  <nav>
+    <ul>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/form-reservas">Reservas</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- Sección de bienvenida -->
+  <section class="welcome">
+    <h1>Bienvenidos a Ten Hag</h1>
+    <p>Disfruta de una experiencia culinaria única con los mejores platos y un ambiente acogedor.</p>
+    <a href="/form-reservas">Reservar ahora</a>
+  </section>
+
+  <!-- Galería de imágenes -->
+  <section class="gallery">
+    <h2>Explora nuestro restaurante</h2>
+    <div class="gallery-grid">
+      <img src="https://images5.alphacoders.com/312/312472.jpg" alt="Restaurante 1" />
+      <img src="https://data.viaje-a-china.com/kcfinder/upload/vac/pic/lucia/hot-pot.jpg" alt="Restaurante 2" />
+      <img src="https://yumbocentrum.com/wp-content/uploads/2020/08/Restaurante-chino-Maspalomas2.jpg" alt="Restaurante 3" />
+    </div>
+  </section>
+
+  <section class="reservas-popup">
+    <h2>Reserva Ya!</h2>
+    <button (click)="navigateToReservations()">Reservar una mesa</button>
+  </section>
+
+  <!-- Menú destacado -->
+  <section class="featured-menu">
+    <h3>Menú destacado</h3>
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="https://tipsparatuviaje.com/wp-content/uploads/2020/02/rollitos-primavera.jpg" alt="Plato 1" />
+        <h3>Rollitos de primavera</h3>
+
+      </div>
+      <div class="menu-item">
+        <img src="https://www.gastrolabweb.com/u/fotografias/m/2022/1/25/f1280x720-24739_156414_5050.jpg" alt="Plato 2" />
+        <h3>Fideos salteados</h3>
+
+      </div>
+      <div class="menu-item">
+        <img src="https://img.freepik.com/fotos-premium/cerca-dim-sum-deliciosa-comida-china_176697-3448.jpg" alt="Plato 2" />
+        <h3>Baos</h3>
+
+      </div>
+      <div class="menu-item">
+        <img src="https://www.cocinadelirante.com/sites/default/files/images/2018/04/pollo-con-brocoli-receta-de-comida-china.jpg" alt="Plato 2" />
+        <h3>Carne con brócoli</h3>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de reservas -->
+  <section class="reservation">
+    <h2>Haz tu reserva ahora</h2>
+    <button (click)="navigateToReservations()">Reservar una mesa</button>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
+  <p>Teléfono: +34 123 456 789</p>
+  <p>&copy; 2024 Ten Hag. Todos los derechos reservados.</p>
+  <a href="/politica-privacidad">Políticas de privacidad</a>
+</footer>

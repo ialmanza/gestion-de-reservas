@@ -16,11 +16,12 @@ import { ReservasListComponent } from './components/reservaciones/reservas-list/
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReservaDetailsComponent } from './components/reservaciones/reserva-details/reserva-details.component';
 import { PoliticPrivacidadComponent } from './components/politic-privacidad/politic-privacidad.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: FormReservasComponent,
+    component: HomeComponent,
   },
   {
     path: 'admin',

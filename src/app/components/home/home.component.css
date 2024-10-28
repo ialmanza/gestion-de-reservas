@@ -1,0 +1,169 @@
+/* home.component.css */
+
+/* Estilos del header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #E26539; /* Naranja oscuro */
+  color: #FFFFFF;
+}
+
+.logo {
+  height: 100px;
+  width: 150px; /* Ajusta el tamaño de la imagen según lo que necesites */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* Estilos del main */
+main {
+  padding: 40px;
+  background-color: #EFDECA; /* Beige claro */
+}
+
+.welcome {
+  text-align: center;
+  margin-bottom: 40px;
+  background-color: #F3E3CD; /* Beige más claro */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.welcome a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #E26539; /* Naranja oscuro */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.gallery {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Estilos del menú destacado */
+.featured-menu {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.menu-item {
+  width: 45%;
+}
+
+.menu-item img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Estilos de la sección de reservas */
+.reservation {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 60px;
+}
+
+.reservation button {
+  padding: 10px 20px;
+  background-color: #E26539; /* Naranja oscuro */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reservation button:hover {
+  background-color: #E26337; /* Variación del naranja */
+}
+
+/* Estilos del footer */
+footer {
+  background-color: #E26539; /* Naranja oscuro */
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+
+.gallery img {
+  width: 400px;  /* Ajusta el valor según tus necesidades */
+  height: 400px; /* Ajusta el valor según tus necesidades */
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
+.reservas-popup {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 60px;
+}
+
+.reservas-popup button {
+  padding: 10px 20px;
+  background-color: #E26539; /* Naranja oscuro */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reservas-popup button:hover {
+  background-color: #E26337; /* Variación del naranja */
+}
+
+.featured-menu {
+  text-align: center;
+}
+
+.featured-menu .menu-items {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espacio entre los elementos del menú */
+}
+
+.featured-menu .menu-item {
+  text-align: center;
+  max-width: 400px; /* Ajusta el ancho máximo de cada elemento del menú */
+}
+
+.featured-menu .menu-item img {
+  width: 400px;  /* Ajusta este valor según tus necesidades */
+  height: 400px; /* Ajusta este valor según tus necesidades */
+  object-fit: cover; /* Mantiene la proporción de la imagen, recortando si es necesario */
+  border-radius: 8px; /* Opcional: para redondear las esquinas de las imágenes */
+
+}
