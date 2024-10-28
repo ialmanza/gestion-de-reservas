@@ -1,10 +1,23 @@
 .cancel-reservation-container {
-  max-width: 400px; /* Ancho máximo del contenedor */
-  margin: 0 auto; /* Centra el contenedor */
-  padding: 20px; /* Espaciado interno */
-  background-color: #fff; /* Color de fondo blanco */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+.container{
+  background-image: url('https://wallpaperaccess.com/full/767277.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 h2 {
