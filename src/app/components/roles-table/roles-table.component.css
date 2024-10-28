@@ -17,7 +17,7 @@ input, select {
 
 button {
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #e66f44;
   color: white;
   border: none;
   cursor: pointer;
@@ -41,4 +41,9 @@ th, td {
 
 button {
   margin-right: 5px;
+}
+
+.head{
+  background-color: #ed794e;
+  color: white
 }

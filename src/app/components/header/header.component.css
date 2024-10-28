@@ -1,11 +1,14 @@
 
-
-#settings-menu {
-  display: none;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #E26539;
+  color: #FFFFFF;
 }
 
-#settings-menu.show {
-  display: block;
+.logo {
+  height: 100px;
+  width: 150px; /* Ajusta el tamaño de la imagen */
 }
-
-

@@ -2,7 +2,7 @@
   <h2 class="text-2xl font-semibold text-center mb-6">Usuarios</h2>
   <div class="overflow-x-auto">
     <table class="w-full table-auto bg-white rounded-lg shadow-lg">
-      <thead class="bg-indigo-600 text-white">
+      <thead class="head">
         <tr>
           <th class="p-4 text-left">Nombre</th>
           <th class="p-4 text-left">Apellido</th>
@@ -22,7 +22,7 @@
           <td class="p-4">{{ role.rol }}</td>
           <td class="p-4">
             <button (click)="openEditModal(role)" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400">Editar</button>
-            <button (click)="onDelete(role.email)" class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-red-400">Eliminar</button>
+            <button (click)="onDelete(role.email)" class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-red-700">Eliminar</button>
           </td>
         </tr>
         <tr *ngIf="!rolesDBService.loading() && roles.length === 0">

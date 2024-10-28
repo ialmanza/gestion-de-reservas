@@ -1,45 +1,45 @@
 @import 'tailwindcss/tailwind.css';
 
-/* Overlay hidden by default */
-.hidden {
+
+/* .hidden {
   display: none;
 }
 
-/* Overlay when visible */
+
 #drawer-overlay {
   transition: opacity 0.3s ease;
 }
 
 
 .custom-button {
-  background-color: transparent; /* Quita el fondo */
-  color: blue; /* Color del texto */
-  border: none; /* Quita el borde */
-  outline: none; /* Quita el contorno */
+  background-color: transparent;
+  color: blue;
+  border: none;
+  outline: none;
   font-size: 18px;
 }
 
 .custom-button:hover {
-  color: black; /* Color del texto al pasar el mouse */
+  color: black;
 }
 
 
-/* Drawer visible class */
+
 .translate-x-0 {
   transform: translateX(0);
 }
 
-/* Hover area */
+
 #drawer-hover-area {
   background: transparent;
 }
 
-/* Drawer hidden class (default) */
+
 .drawer-hidden {
   transform: translateX(-100%);
 }
 
-/* Drawer visible class */
+
 .drawer-visible {
   transform: translateX(0);
 }
@@ -47,14 +47,14 @@
 
 
 .sidebar-container {
-  width: 16rem; /* Ajusta el ancho del sidebar */
-  background-color: #1f2937; /* Color de fondo */
-  color: white; /* Color del texto */
-  transition: transform 0.3s ease; /* Transición suave */
+  width: 16rem;
+  background-color: #1f2937;
+  color: white;
+  transition: transform 0.3s ease;
 }
 
 .sidebar-container.open {
-  transform: translateX(0); /* Sidebar visible */
+  transform: translateX(0);
 }
 
 button {
@@ -73,4 +73,91 @@ li {
 a {
   text-decoration: none;
   color: inherit;
+} */
+
+.logo {
+  height: 200px;
+  width: 200px; /* Ajusta el tamaño de la imagen */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+}
+
+
+a {
+  color: #00bcd4;
+  text-decoration: none;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: #82e9de;
+  border-bottom: 1px solid #82e9de;
+}
+
+
+button {
+  background-color: #e66f44;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #eb8865;
+  transform: scale(1.05);
+}
+
+
+.card {
+  background-color: #1e1e1e;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+
+input, textarea {
+  background-color: #1e1e1e;
+  border: 1px solid #555;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #00bcd4;
+}
+
+.select, .checkbox, .radio {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+

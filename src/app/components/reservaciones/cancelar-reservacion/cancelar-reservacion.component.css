@@ -38,7 +38,7 @@ input:focus {
 .submit-button {
   width: 100%; /* Ocupa todo el ancho del contenedor */
   padding: 10px; /* Espaciado interno */
-  background-color: #6366f1; /* Color de fondo azul */
+  background-color: #E26539; /* Color de fondo azul */
   color: white; /* Color del texto */
   border: none; /* Sin borde */
   border-radius: 4px; /* Bordes redondeados */
@@ -56,4 +56,22 @@ input:focus {
 
 .error {
   color: #dc3545; /* Rojo para mensajes de error */
+}
+
+
+
+.confirmar-button {
+  background-color: #E26539;
+  color: white;
+  border: 1px solid #E26539;
+  width: 100%;
+  padding: 10px;
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s; /* Transición suave para el fondo */
+}
+
+.confirmar-button:hover {
+  background-color: #eb8865;
 }

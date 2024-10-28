@@ -9,3 +9,19 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.confirmar-button {
+  background-color: #E26539;
+  color: white;
+  border: 1px solid #E26539;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirmar-button:hover {
+  background-color: #eb8865;
+}
