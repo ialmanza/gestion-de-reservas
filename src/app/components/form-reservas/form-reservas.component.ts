@@ -107,8 +107,10 @@ export class FormReservasComponent {
       email,
       special_requests,
       tipo_comida: this.tipo_comida!,
-      reservation_time: this.reservation_time = format(this.now, 'HH:mm:ss.SSS'),
-      reservation_date: this.reservation_date = format(this.now, 'yyyy-MM-dd'),
+      reservation_time: this.reservation_time,
+      reservation_date: this.reservation_date,
+      //reservation_time: this.reservation_time = format(this.now, 'HH:mm:ss.SSS'),
+      //reservation_date: this.reservation_date = format(this.now, 'yyyy-MM-dd'),
       chairs_needed: this.cantidadSeleccionada!,
       phone_number,
       hide: true
