@@ -39,8 +39,8 @@ export class FormReservasComponent {
   reservation_date: string | null = null;
   tipo_comida: string | null = null;
   reservation_time: string | null = null;
-  horariosAlmuerzo = ['11:00 AM', '12:00 PM', '1:00 PM'];
-  horariosCena = ['7:00 PM', '8:00 PM', '9:00 PM'];
+  horariosAlmuerzo = ['11:00', '12:00', '13:00'];
+  horariosCena = ['19:00', '20:00', '21:00'];
   selected = model<Date | null>(null);
   pasoActual: number = 1;
   id_email: string = '';
@@ -87,6 +87,53 @@ export class FormReservasComponent {
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
 
+  // adicionarReserva() {
+  //   this.id_email = "";
+  //   const id = Date.now().toString();
+  //   this.id_email = id;
+
+  //   // Obtener valores de los FormGroups
+  //   const first_name = this.nameFormGroup.get('first_name')?.value as string;
+  //   const last_name = this.apellidosFormGroup.get('last_name')?.value as string;
+  //   const email = this.emailFormGroup.get('email')?.value as string;
+  //   const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
+  //   const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
+
+  //   //this.reservasService.addReserva({
+  //   this.dataService.createItem({
+  //     id,
+  //     first_name,
+  //     last_name,
+  //     email,
+  //     special_requests,
+  //     tipo_comida: this.tipo_comida!,
+  //     reservation_time: this.reservation_time,
+  //     reservation_date: this.reservation_date,
+  //     //reservation_time: this.reservation_time = format(this.now, 'HH:mm:ss.SSS'),
+  //     //reservation_date: this.reservation_date = format(this.now, 'yyyy-MM-dd'),
+  //     chairs_needed: this.cantidadSeleccionada!,
+  //     phone_number,
+  //     hide: true
+
+  //   }).subscribe(
+  //     response => {
+  //       console.log('Reserva añadida exitosamente:', response);
+
+  //       // Guarda el ID de la reserva generada
+  //       localStorage.setItem('ultimaReservaId', response.id);
+
+  //       // Cierra el formulario
+  //       this.reiniciarFormulario();
+  //     },
+  //     error => {
+  //       console.error('Error al añadir la reserva:', error);
+  //       // Mostrar mensaje de error al usuario
+  //     }
+  //   );
+
+  //   this.avanzarPaso();
+  // }
+
   adicionarReserva() {
     this.id_email = "";
     const id = Date.now().toString();
@@ -99,7 +146,19 @@ export class FormReservasComponent {
     const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
     const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
 
-    //this.reservasService.addReserva({
+    // Conversión de fecha y hora a los formatos requeridos
+    const selectedDate = new Date(this.reservation_date!); // Suponiendo que reservation_date es un string de fecha
+    const formattedDate = selectedDate.toISOString().split('T')[0]; // Convierte a YYYY-MM-DD
+
+    // Ajustar reservation_time a formato hh:mm:ss.uuuuuu
+    let formattedTime = this.reservation_time;
+    if (this.reservation_time!.length === 5) { // formato hh:mm
+        formattedTime = `${this.reservation_time}:00.000000`;
+    } else if (this.reservation_time!.length === 8) { // formato hh:mm:ss
+        formattedTime = `${this.reservation_time}.000000`;
+    }
+
+    // Llamada al servicio para crear la reserva
     this.dataService.createItem({
       id,
       first_name,
@@ -107,22 +166,15 @@ export class FormReservasComponent {
       email,
       special_requests,
       tipo_comida: this.tipo_comida!,
-      reservation_time: this.reservation_time,
-      reservation_date: this.reservation_date,
-      //reservation_time: this.reservation_time = format(this.now, 'HH:mm:ss.SSS'),
-      //reservation_date: this.reservation_date = format(this.now, 'yyyy-MM-dd'),
+      reservation_time: formattedTime,
+      reservation_date: formattedDate,
       chairs_needed: this.cantidadSeleccionada!,
       phone_number,
       hide: true
-
     }).subscribe(
       response => {
         console.log('Reserva añadida exitosamente:', response);
-
-        // Guarda el ID de la reserva generada
         localStorage.setItem('ultimaReservaId', response.id);
-
-        // Cierra el formulario
         this.reiniciarFormulario();
       },
       error => {
@@ -132,7 +184,9 @@ export class FormReservasComponent {
     );
 
     this.avanzarPaso();
-  }
+}
+
+
 
 
   cerrar() {

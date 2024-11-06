@@ -15,6 +15,10 @@ export class HomeComponent {
 
   // Navegar a la página de reservas
   navigateToReservations(): void {
-    this.router.navigate(['/reservas-form']);
+    this.router.navigate(['/cancelar-reservacion']);
+  }
+
+  navigateToCancelReservation(): void {
+    this.router.navigate(['/cancelar-reservacion']);
   }
 }
