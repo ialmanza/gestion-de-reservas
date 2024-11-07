@@ -225,10 +225,17 @@
     <div *ngIf="pasoActual === 7" class="reservation-container">
       <h2 class="reservation-title">Datos de Reserva</h2>
       <div class="reservation-details">
-        <p><span class="reservation-label">Horario:</span> {{ reservation_time }}</p>
-        <p><span class="reservation-label">Fecha:</span> {{ reservation_date | date: 'fullDate' }}</p>
-        <p><span class="reservation-label">Personas:</span> {{ cantidadSeleccionada }}</p>
-        <p><span class="reservation-label">Tipo de Comida:</span> {{ tipo_comida }}</p>
+        <!-- <p><span class="reservation-label">Código de Reserva:</span> {{ datosReserva.codigo_reserva }}</p>
+        <p><span class="reservation-label">Horario:</span> {{ datosReserva.reservation_time }}</p>
+        <p><span class="reservation-label">Fecha:</span> {{ datosReserva.reservation_date | date: 'fullDate' }}</p>
+        <p><span class="reservation-label">Nombre:</span> {{ datosReserva.first_name }}</p>
+        <p><span class="reservation-label">Apellidos:</span> {{ datosReserva.last_name }}</p> -->
+        <p>
+          Muchas gracias <span class="reservation-label">{{ datosReserva.first_name }}</span> &nbsp; <span class="reservation-label">{{ datosReserva.last_name }}</span>, su reserva del dia <span class="reservation-label">{{ datosReserva.reservation_date | date: 'fullDate' }}</span>
+          a las <span class="reservation-label">{{ datosReserva.reservation_time }}</span> a sido confirmada. Su código es: <span class="reservation-label">{{ datosReserva.codigo_reserva }}</span>
+        </p>
+
+        <!-- &nbsp; inserta un espacio a la fuerza -->
       </div>
       <div class="button-container">
         <button class="cancelar-button" (click)="reiniciarFormulario()">Inicio</button>
