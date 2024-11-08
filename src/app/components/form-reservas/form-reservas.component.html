@@ -3,6 +3,7 @@
 
   <div class="border rounded-lg shadow-md p-6 bg-white">
     <!-- < class="border rounded-lg shadow-md p-6" style="background-color: rgba(255, 255, 255, 0.8);"> PARA BAJARLE LA OPACIDAD AL CARD, EN PROCESO-->
+
     <!-- Cantidad de Personas -->
     <div *ngIf="pasoActual === 1">
 
@@ -55,6 +56,7 @@
                 [class.selected]="tipo_comida === 'cena'"
                 class="tipo-comida-button">Cena</button>
       </div>
+
       <!-- Horarios según tipo de comida -->
       <div *ngIf="tipo_comida" class="mt-4">
         <h3 class="text-lg font-semibold leading-6 text-gray-900 mb-4">
@@ -126,17 +128,6 @@
           <h2 class="payment-title">Verificar</h2>
           <p class="payment-subtitle">Introducir datos de pago</p>
 
-          <!-- Selector de tarjeta -->
-        <!-- <div>
-          <label formControlName="cardType" class="payment-label">Tipo de tarjeta</label>
-          <select id="cardType" class="payment-input" required>
-            <option value="" disabled selected>Seleccionar tipo</option>
-            <option value="visa">Visa</option>
-            <option value="mastercard">MasterCard</option>
-            <option value="amex">American Express</option>
-          </select>
-        </div> -->
-
         <!-- Número de tarjeta -->
         <div>
           <label for="cardNumber" class="payment-label">Número de la tarjeta</label>
@@ -176,26 +167,9 @@
           </div>
 
           <!-- Botón de pago -->
-
-          <!-- Use the template reference variable in your *ngIf directive -->
           <button  class="payment-button" (click)="procesarPago()">Pagar ahora</button>
 
-          <!-- <ng-template #noForm>
-            *ngIf="paymentForm.valid; else noForm"
-            <p class="error-message">Error en los datos</p>
-          </ng-template> -->
-
-          <!-- Mensaje de error -->
-          <p class="payment-error" style="display: none;">Ingrese un número de tarjeta válido.</p>
         </div>
-
-
-        <!-- Botones de acción -->
-        <!-- <div class="button-container">
-          <button class="cancelar-button" (click)="retrocederPaso()">Atrás</button>
-          <button class="confirmar-button" [disabled]="!paymentForm.valid" (click)="procesarPago()">Pagar</button>
-
-        </div> -->
       </form>
 
 
@@ -225,11 +199,6 @@
     <div *ngIf="pasoActual === 7" class="reservation-container">
       <h2 class="reservation-title">Datos de Reserva</h2>
       <div class="reservation-details">
-        <!-- <p><span class="reservation-label">Código de Reserva:</span> {{ datosReserva.codigo_reserva }}</p>
-        <p><span class="reservation-label">Horario:</span> {{ datosReserva.reservation_time }}</p>
-        <p><span class="reservation-label">Fecha:</span> {{ datosReserva.reservation_date | date: 'fullDate' }}</p>
-        <p><span class="reservation-label">Nombre:</span> {{ datosReserva.first_name }}</p>
-        <p><span class="reservation-label">Apellidos:</span> {{ datosReserva.last_name }}</p> -->
         <p>
           Muchas gracias <span class="reservation-label">{{ datosReserva.first_name }}</span> &nbsp; <span class="reservation-label">{{ datosReserva.last_name }}</span>, su reserva del dia <span class="reservation-label">{{ datosReserva.reservation_date | date: 'fullDate' }}</span>
           a las <span class="reservation-label">{{ datosReserva.reservation_time }}</span> a sido confirmada. Su código es: <span class="reservation-label">{{ datosReserva.codigo_reserva }}</span>

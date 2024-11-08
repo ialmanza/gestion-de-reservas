@@ -1,3 +1,4 @@
+import { Reserva } from './../../../models/Ireserva';
 import { Component } from '@angular/core';
 import { ReservasService } from '../../../services/reservas.service';
 import { CommonModule } from '@angular/common';
@@ -18,20 +19,27 @@ export class CancelarReservacionComponent {
   message: string = '';
   success: boolean = false;
 
-  constructor(private reservasService: ReservasService, private dataService: DataService) {}
+  constructor ( private dataService: DataService) {}
 
-  onSubmit() {
-    const cancelled = this.reservasService.cancelReservation(this.reservationId, this.email);
-    if (cancelled) {
+
+
+//Hay que subscribirse al observable de cancelarReservacion y manejar las respuestas de la API
+cancelarReservacion(codigo_reserva: HTMLInputElement) {
+  const valor_codigo = codigo_reserva.value;
+  console.log('Reserva', valor_codigo, typeof valor_codigo);
+  this.dataService.deleteItem(valor_codigo).subscribe({
+    next: (response) => {
       this.message = 'Reserva cancelada con éxito.';
       this.success = true;
-    } else {
-      this.message = 'No se encontró la reserva o no corresponde al usuario.';
+      console.log('Reserva cancelada con éxito.', response);
+    },
+    error: (error) => {
+      this.message = 'No se pudo cancelar la reserva. Verifica el código y vuelve a intentarlo.';
       this.success = false;
+      console.error('Error al cancelar la reserva:', error);
     }
-  }
- cancelarReservacion(codigo_reserva: string) {
-   this.dataService.cancelReservation(codigo_reserva);
- }
+  });
+}
+
 
 }

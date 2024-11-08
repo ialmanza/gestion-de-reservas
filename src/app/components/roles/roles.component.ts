@@ -31,13 +31,13 @@ export class RolesComponent {
     }, { validator: this.passwordMatchValidator });
   }
 
-  // Validación para confirmar que las contraseñas coinciden
+
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null : { 'mismatch': true };
   }
 
-  // En el onSubmit se agrega un rol
+
   onSubmit() {
     if (this.roleForm.valid) {
       const hashedPassword = bcrypt.hashSync(this.roleForm.value.password, 10); // Encriptamos la contraseña
@@ -57,7 +57,7 @@ export class RolesComponent {
 
 
   onDelete(email: string) {
-    this.roles = this.roles.filter(role => role.email !== email); // Eliminamos el rol por email
+    this.roles = this.roles.filter(role => role.email !== email);
   }
 
 

@@ -25,7 +25,6 @@ export class ReservasListComponent {
   }
 
   ngOnInit(): void {
-    //this.reservasService.getReservas().subscribe((reservas : Reserva[]) => {
       this.dataService.getItems().subscribe((reservas : Reserva[]) => {
       this.reservas = reservas
       this.filteredReservas = this.reservas
@@ -36,7 +35,7 @@ export class ReservasListComponent {
     this.filteredReservas = this.reservas.filter(reserva => {
       const reservaId = reserva.id ? reserva.id.toString().toLowerCase() : '';
       const reservaEmail = reserva.email ? reserva.email.toLowerCase() : '';
-      const reservaApellidos = reserva.apellidos ? reserva.apellidos.toLowerCase() : '';
+      const reservaApellidos = reserva.last_name ? reserva.last_name.toLowerCase() : '';
 
       return reservaId.includes(query.toLowerCase()) || reservaEmail.includes(query.toLowerCase()) || reservaApellidos.includes(query.toLowerCase());
   });

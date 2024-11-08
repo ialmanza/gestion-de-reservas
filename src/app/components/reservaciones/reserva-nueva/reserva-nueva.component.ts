@@ -56,32 +56,23 @@ export class ReservaNuevaComponent {
   onSubmitEdit() {
     if (this.editForm.valid) {
       const updatedReserva = this.editForm.value;
-      this.dataService.updateItem(updatedReserva.id, updatedReserva);
+      this.dataService.updateItem(updatedReserva);
       this.closeModal();
     }
   }
 
-  // deleteReserva(reservas : Reserva) {
-  //   if(confirm('Está seguro que desea borrar esta reserva?')) {
-  //     console.log(typeof reservas.id, reservas.id);
 
-  //     this.dataService.deleteItem(parseInt(reservas.id));
-  //     console.log(typeof reservas.id);
-  //   }
-  // }
 
-  deleteReserva(reservas: Reserva) {
-    if (confirm('¿Está seguro que desea borrar esta reserva?')) {
-      const reservaId = typeof reservas.id === 'number' ? reservas.id : parseInt(reservas.id, 10);
-
-      if (!isNaN(reservaId)) {
-        console.log(typeof reservaId, reservaId);
-        this.dataService.deleteItem(reservaId);
-        console.log(typeof reservaId);
-      } else {
-        console.error('El ID de la reserva no es un número válido:', reservas.id);
+  deleteReserva(reserva: Reserva): void {
+    this.dataService.deleteItem(reserva?.codigo_reserva ?? 'undefined').subscribe({
+      next: (response) => {
+        console.log('Reserva eliminada:', response);
+        // Aquí puedes agregar lógica adicional para manejar la eliminación, como refrescar la lista
+      },
+      error: (error) => {
+        console.error('Error al eliminar la reserva:', error);
       }
-    }
+    });
   }
 
   toggleEdit() {
@@ -94,5 +85,25 @@ export class ReservaNuevaComponent {
     this.editModal.show();
   }
 
+  //TRABAJANDO EN EL EDITAR
+
+   buscarReserva(codigo: string) {
+
+    this.dataService.getReservaByCodigo(codigo).subscribe({
+      next: (reserva: Reserva) => {
+
+        this.editForm.patchValue(reserva);
+      },
+      error: (error) => {
+
+        console.error('Error al buscar la reserva:', error);
+      }
+    });
+  }
+
+
+  onEditReserva(codigo: string) {
+    this.buscarReserva(codigo);
+  }
 
 }

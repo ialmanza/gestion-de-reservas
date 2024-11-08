@@ -17,7 +17,6 @@ import {ChangeDetectionStrategy, model} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DataService } from '../../services/data-service.service';
-import { format } from 'date-fns';
 import { Reserva } from '../../models/Ireserva';
 import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserva-details.component";
 import { MatSelectModule } from '@angular/material/select';
@@ -34,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './form-reservas.component.css'
 })
 export class FormReservasComponent {
-  personas = [1, 2, 3, 4, 5];
+  personas = [1, 2, 3, 4];
   cantidadSeleccionada: number | null = 1;
   reservation_date: string | null = null;
   tipo_comida: string | null = null;
@@ -48,8 +47,8 @@ export class FormReservasComponent {
   reservas : Reserva[];
   ultimaReservaConfirmada: Reserva | null = null;
   paymentForm: FormGroup;
-  mensajeRespuesta: string = ''; // Mensaje de respuesta de éxito o error
-  datosReserva: any = null;      // Datos de la reserva en caso de éxito
+  mensajeRespuesta: string = '';
+  datosReserva: any = null;
 
 
   private _formBuilder = inject(FormBuilder);
@@ -72,10 +71,11 @@ export class FormReservasComponent {
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor( private reservasService: ReservasService, private router: Router, private dataService: DataService)
+  constructor( private router: Router, private dataService: DataService)
    {
+
     this.paymentForm = this._formBuilder.group({
-      //cardType: ['', Validators.required],
+
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
       cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
@@ -136,42 +136,16 @@ export class FormReservasComponent {
         this.mensajeRespuesta = error.message; // Muestra el mensaje de error
       }
     });
-    //   response => {
-    //     console.log('Reserva añadida exitosamente:', response);
-    //     localStorage.setItem('ultimaReservaId', response.id);
-    //     this.reiniciarFormulario();
-    //   },
-    //   error => {
-    //     console.error('Error al añadir la reserva:', error);
-    //     // Mostrar mensaje de error al usuario
-    //   }
-    // );
-
-
 
     this.avanzarPaso();
 }
 
 
-
-
-  cerrar() {
-    if (this.nameFormGroup.valid && this.apellidosFormGroup.valid && this.emailFormGroup.valid
-      && this.cantidadSeleccionada !== null && this.reservation_time !== null) {
-
-      this.adicionarReserva();
-
-
-    }
-    this.router.navigate(['/layout']);
-  }
-
   seleccionarPersonas(numero: number) {
     this.cantidadSeleccionada = numero;
-    // Agregar lógica adicional para guardar la cantidad seleccionada
+
     console.log('Cantidad seleccionada:', numero);
   }
-
 
   seleccionarTipoComida(tipo: string) {
     this.tipo_comida = tipo;

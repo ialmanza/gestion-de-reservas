@@ -143,37 +143,6 @@ footer {
   background-color: #E26337;
 }
 
-/* TRABAJANDO EN POPUP
-
-.reservas-popup {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 40px auto;
-  padding: 40px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-  max-width: 400px;
-  color: white;
-}
-
-.reservas-popup button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #E26539;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.reservas-popup button:hover {
-  background-color: #E26337;
-} */
-
 .featured-menu {
   text-align: center;
 }
@@ -181,19 +150,19 @@ footer {
 .featured-menu .menu-items {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Espacio entre los elementos del menú */
+  gap: 20px;
 }
 
 .featured-menu .menu-item {
   text-align: center;
-  max-width: 400px; /* Ajusta el ancho máximo de cada elemento del menú */
+  max-width: 400px;
 }
 
 .featured-menu .menu-item img {
-  width: 400px;  /* Ajusta este valor según tus necesidades */
-  height: 400px; /* Ajusta este valor según tus necesidades */
-  object-fit: cover; /* Mantiene la proporción de la imagen, recortando si es necesario */
-  border-radius: 8px; /* Opcional: para redondear las esquinas de las imágenes */
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
 
 }
 

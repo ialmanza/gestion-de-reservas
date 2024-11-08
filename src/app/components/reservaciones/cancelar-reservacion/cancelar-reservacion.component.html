@@ -3,12 +3,12 @@
   <div class="flex min-h-full flex-col justify-center px-6 py-12  lg:px-8">
     <div class="cancel-reservation-container sm:mx-auto sm:w-full sm:max-w-md bg-white p-8 rounded-lg shadow-lg">
       <h2 class="text-center text-3xl font-extrabold text-gray-900">Cancelar Reserva</h2>
-      <form (ngSubmit)="onSubmit()" #cancelForm="ngForm" class="mt-8 space-y-6">
+      <form (ngSubmit)="cancelarReservacion(reservation_code)" #cancelForm="ngForm" class="mt-8 space-y-6">
         <div>
           <label for="reservationId" class="block text-sm font-medium text-gray-700">Código de Reserva:</label>
           <div class="mt-1">
             <input type="text" id="reservationId" required [(ngModel)]="reservationId" name="reservationId"
-              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Código de Reserva enviado" />
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Código de Reserva enviado" #reservation_code />
           </div>
         </div>
 

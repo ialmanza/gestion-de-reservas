@@ -8,5 +8,13 @@ export interface Reserva {
   horario: string;
   telefono: string;
   hide: boolean;
-  codigo_reserva?: string
+  codigo_reserva?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number?: string;
+  reservation_date?: string;
+  reservation_time?: string;
+  chairs_needed?: string;
 }
+
+

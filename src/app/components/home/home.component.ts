@@ -13,7 +13,6 @@ export class HomeComponent {
 
   constructor(private router: Router) { }
 
-  // Navegar a la página de reservas
   navigateToReservations(): void {
     this.router.navigate(['/cancelar-reservacion']);
   }

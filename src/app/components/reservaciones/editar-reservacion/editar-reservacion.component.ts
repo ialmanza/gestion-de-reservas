@@ -45,10 +45,10 @@ export class EditarReservacionComponent {
     editing: any;
 
     form: FormGroup = new FormGroup({
-      nombre: new FormControl(''),
-      apellidos: new FormControl(''),
+      first_name: new FormControl(''),
+      last_name: new FormControl(''),
       email: new FormControl(''),
-      observaciones: new FormControl(''),
+      specials_requests: new FormControl(''),
     });
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<EditarReservacionComponent>, private reservacionesService: ReservasService) {
@@ -57,10 +57,10 @@ export class EditarReservacionComponent {
 
     ngOnInit(): void {
       this.form = new FormGroup({
-        nombre: new FormControl(this.data.nombre),
-        apellidos: new FormControl(this.data.apellidos),
+        first_name: new FormControl(this.data.nombre),
+        last_name: new FormControl(this.data.apellidos),
         email: new FormControl(this.data.email),
-        observaciones: new FormControl(this.data.observaciones),
+        specials_requests: new FormControl(this.data.observaciones),
       })
     }
 

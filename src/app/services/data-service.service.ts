@@ -1,81 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { map, Observable, of } from 'rxjs';
-// import { Reserva } from '../models/Ireserva';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class DataService {
-//   private apiUrl = 'https://maxipanza.com/reservations/'; // Reemplazar  la URL de la API
-
-//   constructor(private http: HttpClient) { }
-
-//   getItems(): Observable<any[]> {
-//     return this.http.get<any[]>(this.apiUrl);
-//   }
-
-//   getItem(id: number): Observable<any> {
-//     return this.http.get(`${this.apiUrl}/${id}`);
-//   }
-
-//   createItem(item: any): Observable<any> {
-//     return this.http.post(this.apiUrl, item);
-//   }
-
-//   updateItem(id: number, item: any): Observable<any> {
-//     const header = new HttpHeaders({
-//       'Content-Type': 'application/json'
-//     });
-//     return this.http.post(`${this.apiUrl}/${id}`, item, { headers: header });
-//   }
-
-//   // deleteItem(id: number): Observable<void> {
-//   //   const header = new HttpHeaders({
-//   //     'Content-Type': 'application/json'
-//   //   });
-//   //   console.log(`${this.apiUrl}/${id}`);
-//   //   return this.http.delete<void>(`${this.apiUrl}${id}/`);
-//   // }
-
-//   deleteItem(id: number): Observable<void> {
-//     const header = new HttpHeaders({
-//       'Content-Type': 'application/json'
-//     });
-
-//     // Asegúrate de que la URL tenga una barra al final
-//     const url = `${this.apiUrl.endsWith('/') ? this.apiUrl : this.apiUrl + '/'}${id}`;
-//     console.log(url);
-
-//     return this.http.delete<void>(url, { headers: header });
-//   }
-
-//   cancelReservation(codigo_reserva: string){
-
-//     // const header = new HttpHeaders({
-//     //   'Content-Type': 'application/json'
-//     // });
-
-//     return this.http.delete(`${this.apiUrl}${codigo_reserva}`);
-//   }
-
-//   getReservaById(id: string): Observable<Reserva | null> {
-//     return this.getItems().pipe(
-//       map(items => items.find(reserva => reserva.id === id) || null)
-//     );
-//   }
-
-
-//   getLastReservation(): Observable<Reserva | null> {
-//     return this.getItems().pipe(
-//       map(reservas => reservas.length > 0 ? reservas[reservas.length - 1] : null)
-//     );
-//   }
-
-// }
-
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -98,8 +20,8 @@ export class DataService {
   }
 
   // Método para obtener una reserva por ID
-  getItem(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`).pipe(
+  getReservaByCodigo(id: string): Observable<any> {
+    return this.http.get<Reserva>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -112,29 +34,35 @@ export class DataService {
   }
 
   // Método para actualizar una reserva existente
-  updateItem(id: number, item: any): Observable<any> {
+  // updateItem(codigo_reserva: string): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   });
+  //   return this.http.put(`${this.apiUrl}${codigo_reserva}/`,   { headers: headers }).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // updateItem(updatedReserva: Reserva): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   });
+  //   return this.http.put(`${this.apiUrl}${updatedReserva.codigo_reserva}/`, updatedReserva, { headers })
+  //     .pipe(catchError(this.handleError));
+  // }
+
+  updateItem(updatedReserva: Reserva): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.put(`${this.apiUrl}/${id}`, item, { headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.put(`https://maxipanza.com/reservations/${updatedReserva.codigo_reserva}/`, updatedReserva, { headers })
+      .pipe(catchError(this.handleError));
   }
 
-  // Método para eliminar una reserva
-  deleteItem(id: number): Observable<void> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    const url = `${this.apiUrl.endsWith('/') ? this.apiUrl : this.apiUrl + '/'}${id}`;
-    return this.http.delete<void>(url, { headers }).pipe(
-      catchError(this.handleError)
-    );
-  }
 
-  // Método para cancelar una reserva específica usando su código de reserva
-  cancelReservation(codigo_reserva: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${codigo_reserva}`).pipe(
+  // Método para eliminar una reserva específica usando su código de reserva
+  deleteItem(codigo_reserva: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}${codigo_reserva}/`).pipe(
       catchError(this.handleError)
     );
   }

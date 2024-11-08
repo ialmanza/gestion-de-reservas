@@ -21,54 +21,54 @@
 }
 
 h2 {
-  color: #1f2937; /* Color del texto */
+  color: #1f2937;
 }
 
 .form-group {
-  margin-bottom: 15px; /* Espacio entre campos del formulario */
+  margin-bottom: 15px;
 }
 
 label {
-  display: block; /* Ocupa todo el ancho */
-  font-weight: 600; /* Negrita para las etiquetas */
-  color: #4b5563; /* Color del texto de las etiquetas */
-  margin-bottom: 5px; /* Espacio debajo de la etiqueta */
+  display: block;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 5px;
 }
 
 input {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  padding: 10px; /* Espaciado interno */
-  border: 1px solid #d1d5db; /* Borde gris claro */
-  border-radius: 4px; /* Bordes redondeados */
-  transition: border-color 0.3s; /* Transición suave para el borde */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  transition: border-color 0.3s;
 }
 
 input:focus {
-  border-color: #6366f1; /* Borde azul al hacer foco */
-  outline: none; /* Elimina el borde de enfoque predeterminado */
+  border-color: #6366f1;
+  outline: none;
 }
 
 .submit-button {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  padding: 10px; /* Espaciado interno */
-  background-color: #E26539; /* Color de fondo azul */
-  color: white; /* Color del texto */
-  border: none; /* Sin borde */
-  border-radius: 4px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: background-color 0.3s; /* Transición suave para el fondo */
+  width: 100%;
+  padding: 10px;
+  background-color: #E26539;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-  background-color: #4f46e5; /* Color más oscuro al pasar por encima */
+  background-color: #4f46e5;
 }
 
 .success {
-  color: #28a745; /* Verde para mensajes de éxito */
+  color: #28a745; /
 }
 
 .error {
-  color: #dc3545; /* Rojo para mensajes de error */
+  color: #dc3545;
 }
 
 
@@ -79,10 +79,10 @@ input:focus {
   border: 1px solid #E26539;
   width: 100%;
   padding: 10px;
-  border: none; /* Sin borde */
-  border-radius: 4px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: background-color 0.3s; /* Transición suave para el fondo */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .confirmar-button:hover {

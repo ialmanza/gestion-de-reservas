@@ -304,9 +304,9 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 }
 
 .error-message {
-  color: #d9534f; /* Color rojo para el mensaje de error */
-  background-color: #f8d7da; /* Fondo suave en rojo claro */
-  border: 1px solid #f5c6cb; /* Borde que acompaña al fondo */
+  color: #d9534f;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
   padding: 10px;
   border-radius: 4px;
   font-size: 0.9em;
@@ -320,7 +320,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 }
 
 .payment-button {
-  background-color: #5cb85c; /* Botón verde de pago */
+  background-color: #5cb85c;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -331,7 +331,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 }
 
 .payment-button:disabled {
-  background-color: #c0c0c0; /* Botón gris deshabilitado */
+  background-color: #c0c0c0;
   cursor: not-allowed;
 }
 

@@ -1,97 +1,10 @@
 @import 'tailwindcss/tailwind.css';
 
 
-/* .hidden {
-  display: none;
-}
-
-
-#drawer-overlay {
-  transition: opacity 0.3s ease;
-}
-
-
-.custom-button {
-  background-color: transparent;
-  color: blue;
-  border: none;
-  outline: none;
-  font-size: 18px;
-}
-
-.custom-button:hover {
-  color: black;
-}
-
-
-
-.translate-x-0 {
-  transform: translateX(0);
-}
-
-
-#drawer-hover-area {
-  background: transparent;
-}
-
-
-.drawer-hidden {
-  transform: translateX(-100%);
-}
-
-
-.drawer-visible {
-  transform: translateX(0);
-}
-
-
-
-.sidebar-container {
-  width: 16rem;
-  background-color: #1f2937;
-  color: white;
-  transition: transform 0.3s ease;
-}
-
-.sidebar-container.open {
-  transform: translateX(0);
-}
-
-button {
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-} */
-
 .logo {
   height: 200px;
   width: 200px; /* Ajusta el tamaño de la imagen */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 body {
   background-color: #121212;
