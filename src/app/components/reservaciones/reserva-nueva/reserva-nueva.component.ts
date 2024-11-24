@@ -1,109 +1,104 @@
-import { Component, Input } from '@angular/core';
-import { ReservasService } from '../../../services/reservas.service';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reserva } from '../../../models/Ireserva';
-import { MatDialog} from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { DataService } from '../../../services/data-service.service';
-
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reserva-nueva',
   standalone: true,
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule],
-  providers: [ReservasService, DataService],
+  imports: [ CommonModule, ReactiveFormsModule ],
+  providers: [DataService],
   templateUrl: './reserva-nueva.component.html',
-  styleUrl: './reserva-nueva.component.css'
+  styleUrls: ['./reserva-nueva.component.css'],
 })
-export class ReservaNuevaComponent {
-  @Input() reservas: Reserva | undefined;
-  editing: boolean = false;
-  private editModal: any;
-  isModalOpen = false;
+export class ReservaNuevaComponent implements OnInit {
+  @Input() reservas!: Reserva;
   editForm: FormGroup;
+  isModalOpen = false;
+  isDeleteModalOpen = false;
 
-
-  constructor( private reservasService: ReservasService, private dialog: MatDialog, private fb: FormBuilder, private dataService: DataService) {
+  constructor(private fb: FormBuilder, private dataService: DataService) {
     this.editForm = this.fb.group({
-      id: ['', Validators.required],
+      id: [''],
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', Validators.required],
       tipo_comida: ['', Validators.required],
       horario: ['', Validators.required],
-      observaciones: ['']
+      observaciones: [''],
+      reservation_date: ['', Validators.required],
+      chairs_needed: [1, Validators.required]
     });
-   }
-
+  }
 
   ngOnInit(): void {
     if (this.reservas) {
       this.editForm.patchValue(this.reservas);
     }
-   }
+  }
 
-  openEditDialog(reserva: any) {
+  onEditReserva(): void {
+    this.editForm.patchValue(this.reservas);
     this.isModalOpen = true;
-    this.editForm.patchValue(reserva);
   }
 
-  closeModal() {
-    this.isModalOpen = false;
-  }
-
-  onSubmitEdit() {
+  onSubmitEdit(): void {
     if (this.editForm.valid) {
       const updatedReserva = this.editForm.value;
-      this.dataService.updateItem(updatedReserva);
-      this.closeModal();
+
+      const payload = {
+        first_name: updatedReserva.nombre,
+        last_name: updatedReserva.apellidos,
+        email: updatedReserva.email,
+        phone_number: updatedReserva.telefono,
+        tipo_comida: updatedReserva.tipo_comida,
+        reservation_time: updatedReserva.horario,
+        special_requests: updatedReserva.observaciones,
+        reservation_date: updatedReserva.reservation_date,
+        chairs_needed: updatedReserva.chairs_needed,
+      };
+
+      const reservationId = this.reservas.codigo_reserva!;
+
+      this.dataService.updateReserva(payload, reservationId).subscribe({
+        next: (response) => {
+          console.log('Reserva actualizada:', response);
+          this.isModalOpen = false;
+        },
+        error: (error) => {
+          console.error('Error al actualizar la reserva:', error);
+        },
+      });
     }
   }
 
 
-
-  deleteReserva(reserva: Reserva): void {
-    this.dataService.deleteItem(reserva?.codigo_reserva ?? 'undefined').subscribe({
-      next: (response) => {
-        console.log('Reserva eliminada:', response);
-        // Aquí puedes agregar lógica adicional para manejar la eliminación, como refrescar la lista
-      },
-      error: (error) => {
-        console.error('Error al eliminar la reserva:', error);
-      }
-    });
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 
-  toggleEdit() {
-    this.editing = !this.editing;
+  openDeleteModal(): void {
+    this.isDeleteModalOpen = true;
   }
 
-
-  openEditModal() {
-    this.editing = true;
-    this.editModal.show();
+  closeDeleteModal(): void {
+    this.isDeleteModalOpen = false;
   }
 
-  //TRABAJANDO EN EL EDITAR
-
-   buscarReserva(codigo: string) {
-
-    this.dataService.getReservaByCodigo(codigo).subscribe({
-      next: (reserva: Reserva) => {
-
-        this.editForm.patchValue(reserva);
-      },
-      error: (error) => {
-
-        console.error('Error al buscar la reserva:', error);
-      }
-    });
+  onConfirmDelete(): void {
+    if (this.reservas?.codigo_reserva) {
+      this.dataService.deleteItem(this.reservas.codigo_reserva).subscribe({
+        next: () => {
+          console.log('Reserva eliminada con éxito');
+          this.isDeleteModalOpen = false;
+        },
+        error: (error) => {
+          console.error('Error al eliminar la reserva:', error);
+        },
+      });
+    }
   }
-
-
-  onEditReserva(codigo: string) {
-    this.buscarReserva(codigo);
-  }
-
 }

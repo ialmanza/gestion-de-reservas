@@ -131,6 +131,7 @@ export class FormReservasComponent {
       next: (response) => {
         this.mensajeRespuesta = 'Reserva realizada con éxito';
         this.datosReserva = response; // Almacena los datos de la reserva
+        console.log('Reserva creada:', response);
       },
       error: (error) => {
         this.mensajeRespuesta = error.message; // Muestra el mensaje de error

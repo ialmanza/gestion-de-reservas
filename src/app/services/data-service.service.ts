@@ -33,30 +33,9 @@ export class DataService {
     );
   }
 
-  // Método para actualizar una reserva existente
-  // updateItem(codigo_reserva: string): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-  //   return this.http.put(`${this.apiUrl}${codigo_reserva}/`,   { headers: headers }).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // updateItem(updatedReserva: Reserva): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-  //   return this.http.put(`${this.apiUrl}${updatedReserva.codigo_reserva}/`, updatedReserva, { headers })
-  //     .pipe(catchError(this.handleError));
-  // }
-
-  updateItem(updatedReserva: Reserva): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.put(`https://maxipanza.com/reservations/${updatedReserva.codigo_reserva}/`, updatedReserva, { headers })
-      .pipe(catchError(this.handleError));
+  updateReserva(payload: any, reservationId: string): Observable<any> {
+    const url = `https://maxipanza.com/reservations/${reservationId}/`;
+    return this.http.put(url, payload);
   }
 
 
