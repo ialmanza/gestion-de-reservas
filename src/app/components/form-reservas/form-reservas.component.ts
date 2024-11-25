@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup} from '@angular/forms';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
@@ -22,6 +22,7 @@ import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserv
 import { MatSelectModule } from '@angular/material/select';
 import { MissingFieldsModalComponent } from '../missing-fields-modal/missing-fields-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-form-reservas',
@@ -77,7 +78,7 @@ export class FormReservasComponent {
    {
 
     this.paymentForm = this._formBuilder.group({
-
+      email: ['', [Validators.required, Validators.email]],
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
       cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
@@ -104,23 +105,26 @@ export class FormReservasComponent {
     const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
     const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
 
-     // Validar si la fecha es posterior a la fecha actual
-    const selectedDate = new Date(this.reservation_date!); // Conversión de fecha y hora a los formatos requeridos
+
+    const selectedDate = new Date(this.reservation_date!);
     const today = new Date();
     if (selectedDate < today) {
       missingFields.push('Fecha (debe ser posterior a hoy)');
     }
     const formattedDate = selectedDate.toISOString().split('T')[0];
 
-    // Ajustar reservation_time a formato hh:mm:ss.uuuuuu
+    if (this.cantidadSeleccionada! > 1000) {
+      missingFields.push('Cantidad de personas (debe ser menor o igual a 1000)');
+    }
+
+
     let formattedTime = this.reservation_time;
-    if (this.reservation_time!.length === 5) { // formato hh:mm
+    if (this.reservation_time!.length === 5) {
         formattedTime = `${this.reservation_time}:00.000000`;
-    } else if (this.reservation_time!.length === 8) { // formato hh:mm:ss
+    } else if (this.reservation_time!.length === 8) {
         formattedTime = `${this.reservation_time}.000000`;
     }
 
-       // Check for missing required fields before making the API call
 
     if (!first_name) {
       missingFields.push('Nombre');
@@ -131,15 +135,29 @@ export class FormReservasComponent {
     if (!email || !this.validateEmail(email)) {
       missingFields.push('Correo Electrónico (formato válido)');
     }
-    // Add checks for other required fields
+    if (!phone_number) {
+      missingFields.push('Número de Teléfono');
+    }
+    if (!this.cantidadSeleccionada) {
+      missingFields.push('Cantidad de personas');
+    }
+    if (!this.reservation_time) {
+      missingFields.push('Horario');
+    }
+    if (!this.reservation_date) {
+      missingFields.push('Fecha');
+    }
+    if (!this.tipo_comida) {
+      missingFields.push('Tipo de comida');
+    }
 
 
     if (missingFields.length > 0) {
-      // Show modal indicating missing fields
+
       this.openModal('Campos Faltantes', `Los siguientes campos obligatorios no se han completado: ${missingFields.join(', ')}`);
-      return; // Prevent the API call if any fields are missing
+      return;
     }
-    // Llamada al servicio para crear la reserva
+
     this.dataService.createItem({
       id,
       first_name,
@@ -155,11 +173,11 @@ export class FormReservasComponent {
     }).subscribe({
       next: (response) => {
         this.mensajeRespuesta = 'Reserva realizada con éxito';
-        this.datosReserva = response; // Almacena los datos de la reserva
+        this.datosReserva = response;
         console.log('Reserva creada:', response);
       },
       error: (error) => {
-        this.mensajeRespuesta = error.message; // Muestra el mensaje de error
+        this.mensajeRespuesta = error.message;
       }
     });
 
@@ -202,7 +220,7 @@ export class FormReservasComponent {
       console.log('Datos del Pago:', paymentData);
       console.log('Total a pagar:', this.calcularTotal());
 
-      // Aquí podrías simular un proceso de pago o enviar los datos a un servicio
+      // Está simulado, no se envia a la base de datos
       this.avanzarPaso();
     } else {
       console.log('Formulario de pago no es válido.');
@@ -225,6 +243,7 @@ export class FormReservasComponent {
   }
 
   reiniciarFormulario(){
+    this.downloadReservation();
     this.nameFormGroup.reset();
     this.apellidosFormGroup.reset();
     this.emailFormGroup.reset();
@@ -263,13 +282,44 @@ export class FormReservasComponent {
     this.dataService.createItem(reservaData).subscribe({
       next: (response) => {
         this.mensajeRespuesta = 'Reserva realizada con éxito';
-        this.datosReserva = response; // Almacena los datos de la reserva
+        this.datosReserva = response;
       },
       error: (error) => {
-        this.mensajeRespuesta = error.message; // Muestra el mensaje de error
+        this.mensajeRespuesta = error.message;
       }
     });
 
   }
+
+  downloadReservation() {
+    if (!this.datosReserva) {
+      console.error('No hay datos de reservación disponibles para descargar.');
+      return;
+    }
+
+    const doc = new jsPDF();
+
+    // Configuración inicial del documento
+    doc.setFontSize(16);
+    doc.text('Confirmación de Reserva', 105, 10, { align: 'center' });
+
+    // Espaciado y detalles de la reservación
+    doc.setFontSize(12);
+    doc.text(`Código de Reserva: ${this.datosReserva.codigo_reserva}`, 10, 40);
+    doc.text(`Nombre: ${this.datosReserva.first_name} ${this.datosReserva.last_name}`, 10, 50);
+    doc.text(`Fecha de la Reserva: ${this.datosReserva.reservation_date}`, 10, 60);
+    doc.text(`Hora de la Reserva: ${this.datosReserva.reservation_time}`, 10, 70);
+
+    if (this.datosReserva.special_requests) {
+      doc.text(`Comentarios: ${this.datosReserva.special_requests}`, 10, 80);
+    }
+
+    // Agrega un agradecimiento o mensaje personalizado
+    doc.text('¡Gracias por su reserva! Nos vemos pronto.', 10, 120);
+
+    // Genera y descarga el archivo PDF
+    doc.save(`reserva_${this.datosReserva.first_name}_${this.datosReserva.last_name}.pdf`);
+  }
+
 
 }

@@ -19,27 +19,22 @@ export class AuthService {
 
   }
 
-
-  //Determina si el usuario está autenticado
   private isAuthenticated(): boolean {
     const usuariologueado = localStorage.getItem('usuariologueado');
     return usuariologueado === 'true';
   }
 
-  //Obtener sesión actual del usuario (si existe)
   session() {
     return this._supabaseClient.auth.getSession();
   }
 
-  //Registro de usuario
   async signUp(credentials: SignUpWithPasswordCredentials): Promise<any> {
     try {
       const { data, error } = await this._supabaseClient.auth.signUp(credentials);
       if (error) throw error;
 
-      //Guarda el usuario como logueado y actualiza el estado
      localStorage.setItem('usuariologueado', 'true');
-      localStorage.setItem('currentUserEmail', data.user?.email ?? ''); // Guarda el email del usuario
+      localStorage.setItem('currentUserEmail', data.user?.email ?? '');
 
       this.authStateSubject.next(true);
       return data;
@@ -54,20 +49,18 @@ export class AuthService {
     }
   }
 
-  //Inicio de sesión
+
   async logIn(credentials: SignInWithPasswordCredentials): Promise<any> {
     try {
       const { data, error } = await this._supabaseClient.auth.signInWithPassword(credentials);
       if (error) throw error;
 
-      // Guarda el usuario como logueado y actualiza el estado
       localStorage.setItem('usuariologueado', 'true');
       localStorage.setItem('currentUserEmail', data.user?.email ?? '');
 
-      // Obtener y almacenar el rol del usuario
       const role = await this.fetchUserRole(data.user?.email!);
       if (role) {
-        localStorage.setItem('currentUserRole', role); // Guarda el rol del usuario
+        localStorage.setItem('currentUserRole', role);
       } else {
         console.warn('No se encontró rol para el usuario');
       }
@@ -86,7 +79,6 @@ export class AuthService {
   }
 
 
-  //Cerrar sesión
   signOut(): void {
     localStorage.removeItem('usuariologueado');
     localStorage.removeItem('currentUserEmail');
@@ -96,7 +88,6 @@ export class AuthService {
     this._supabaseClient.auth.signOut();
   }
 
-  //Obtener el rol del usuario desde una fuente externa
 
   async fetchUserRole(email: string): Promise<string | null> {
     return this.rolesBdService.getRoleByEmail(email);

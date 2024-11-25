@@ -18,20 +18,5 @@ export class RoleGuard implements CanActivate {
 
     this.router.navigate(['/access-denied']);
     return false;
-
-    // TRABAJANDO PARA ELIMINAR EL USO DEL localStorage COMPLETAMENTE, EN DESARROLLO
-
-    // const email = localStorage.getItem('currentUserEmail');
-    // if (email) {
-    //   this.authService.fetchUserRole(email).then((role: string | null) => {
-    //     if (role && role === 'administrador') {
-    //       console.log(`Rol del usuario: ${role}`);
-    //       return true; // Add this line
-    //     }
-    //     return false; // Add this line
-    //   });
-    // }
-    // this.router.navigate(['/access-denied']);
-    // return false;
   }
 }

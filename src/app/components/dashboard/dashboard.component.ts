@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'flowbite';
+import { GraficoComponent } from "../grafico/grafico.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GraficoComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

@@ -8,7 +8,7 @@ import { Reserva } from '../models/Ireserva';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'https://maxipanza.com/reservations/'; // Reemplaza con la URL de tu API
+  private apiUrl = 'https://maxipanza.com/reservations/';
 
   constructor(private http: HttpClient) { }
 
@@ -66,10 +66,8 @@ export class DataService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Ocurrió un error inesperado';
     if (error.error instanceof ErrorEvent) {
-      // Error de cliente o de red
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Error del backend
       errorMessage = error.error.message || 'No se pudo procesar la solicitud';
     }
     return throwError(() => new Error(errorMessage));

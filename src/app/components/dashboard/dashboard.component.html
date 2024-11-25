@@ -6,8 +6,9 @@
   </div>
 
   <div class="reservas-resumen">
-    <h2>Resumen de Reservas del Día</h2>
+    <h2>Resumen de Reservas por Día</h2>
     <p>Total de Reservas: {{ totalReservas }}</p>
+    <app-grafico></app-grafico>
     <ul>
       <li *ngFor="let reserva of reservasDelDia">{{ reserva.nombre }} - {{ reserva.hora }}</li>
     </ul>

@@ -23,7 +23,6 @@ export interface RolesStates {
 })
 export class RolesBdService {
   private _supabaseClient=inject(SupabaseService).supabaseClient
-  //private _authService = inject(AuthService);
 
   private _state = signal<RolesStates>({
     roles: [],
@@ -52,12 +51,12 @@ export class RolesBdService {
 
         if (data && data.length > 0) {
           this._state.update(state => ({ ...state, roles: data }));
-          return data; // Retorna los datos obtenidos
+          return data;
         }
-        return []; // Retorna un array vacío si no hay datos
+        return [];
     } catch (error) {
       this._state.update(state => ({ ...state, error: true }));
-      return []; // Retorna un array vacío en caso de error
+      return [];
     } finally {
       this._state.update(state => ({ ...state, loading: false }));
     }

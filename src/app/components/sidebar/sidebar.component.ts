@@ -19,10 +19,9 @@ export class SidebarComponent {
   isSidebarOpen: boolean = false;
   private authSubscription: Subscription | undefined;
   private _authService = inject(AuthService)
+  userRole = localStorage.getItem('currentUserRole');
 
   constructor(private router: Router, private authService: AuthService, private cdr: ChangeDetectorRef) {}
-
-
 
 
   async logout() {

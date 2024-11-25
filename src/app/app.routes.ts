@@ -18,6 +18,7 @@ import { ReservaDetailsComponent } from './components/reservaciones/reserva-deta
 import { PoliticPrivacidadComponent } from './components/politic-privacidad/politic-privacidad.component';
 import { HomeComponent } from './components/home/home.component';
 import { MissingFieldsModalComponent } from './components/missing-fields-modal/missing-fields-modal.component';
+import { GraficoComponent } from './components/grafico/grafico.component';
 
 export const routes: Routes = [
   {
@@ -76,7 +77,7 @@ export const routes: Routes = [
        {
         path: 'roles-change-pass',
         loadComponent: () => import('./components/roles-change-pass/role-change-pass.component').then(m => m.RoleChangePassComponent),
-        canActivate: [RoleGuard],
+
       },
        {
         path: 'cancelar-reservacion',
@@ -140,6 +141,10 @@ export const routes: Routes = [
   {
     path: 'missing-fields-modal',
     component: MissingFieldsModalComponent
+  },
+  {
+    path:'grafico',
+    component: GraficoComponent
   }
 
 

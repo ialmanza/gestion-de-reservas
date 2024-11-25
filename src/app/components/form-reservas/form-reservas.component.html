@@ -2,7 +2,6 @@
 <div class="container">
 
   <div class="border rounded-lg shadow-md p-6 bg-white">
-    <!-- < class="border rounded-lg shadow-md p-6" style="background-color: rgba(255, 255, 255, 0.8);"> PARA BAJARLE LA OPACIDAD AL CARD, EN PROCESO-->
 
     <!-- Cantidad de Personas -->
     <div *ngIf="pasoActual === 1">
@@ -137,7 +136,6 @@
 
     <!-- Pasarela de pago -->
     <div *ngIf="pasoActual === 5">
-      <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Pasarela de Pago</h2>
       <p class="mb-4"><strong>Total a pagar:</strong> ${{ calcularTotal() }}</p>
 
       <form [formGroup]="paymentForm">
@@ -150,6 +148,10 @@
         <div>
           <label for="cardNumber" class="payment-label">Número de la tarjeta</label>
           <input type="text" formControlName="cardNumber" id="cardNumber" class="payment-input" placeholder="1234 5678 9012 3456" />
+          <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched">
+            <p class="error-message" *ngIf="paymentForm.get('cardNumber')?.errors?.['required']">El número de tarjeta es obligatorio.</p>
+            <p class="error-message" *ngIf="paymentForm.get('cardNumber')?.errors?.['pattern']">Debe tener 16 dígitos.</p>
+          </div>
         </div>
 
         <!-- Fecha de vencimiento y CVC -->
@@ -157,10 +159,18 @@
           <div>
             <label for="expiryDate" class="payment-label">fecha de vencimiento</label>
             <input type="text" formControlName="expiryDate" id="expiryDate" class="payment-input" placeholder="MM/YY" />
+            <div *ngIf="paymentForm.get('expiryDate')?.invalid && paymentForm.get('expiryDate')?.touched">
+              <p class="error-message" *ngIf="paymentForm.get('expiryDate')?.errors?.['required']">La fecha de vencimiento es obligatoria.</p>
+              <p class="error-message" *ngIf="paymentForm.get('expiryDate')?.errors?.['pattern']">Debe tener el formato MM/YY.</p>
+            </div>
           </div>
           <div>
             <label for="cvc" class="payment-label">CVC</label>
             <input type="text" formControlName="cvv" id="cvc" class="payment-input" placeholder="123" />
+            <div *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched">
+              <p class="error-message" *ngIf="paymentForm.get('cvv')?.errors?.['required']">El CVC es obligatorio.</p>
+              <p class="error-message" *ngIf="paymentForm.get('cvv')?.errors?.['pattern']">Debe tener 3 ó 4 dígitos.</p>
+            </div>
           </div>
         </div>
 
@@ -169,19 +179,29 @@
          <div>
           <label for="cardHolderName" class="payment-label">Nombre del titular</label>
           <input type="text" formControlName="cardHolderName" id="cardHolderName" class="payment-input" placeholder="John Doe" />
+          <div *ngIf="paymentForm.get('cardHolderName')?.invalid && paymentForm.get('cardHolderName')?.touched">
+            <p class="error-message" *ngIf="paymentForm.get('cardHolderName')?.errors?.['required']">El nombre del titular es obligatorio.</p>
+          </div>
         </div>
 
         <!-- Nombre del banco -->
         <div>
           <label for="bankName" class="payment-label">Nombre del banco</label>
           <input type="text" formControlName="bankName" id="bankName" class="payment-input" placeholder="Nombre del banco" required />
+          <div *ngIf="paymentForm.get('bankName')?.invalid && paymentForm.get('bankName')?.touched">
+            <p class="error-message" *ngIf="paymentForm.get('bankName')?.errors?.['required']">El nombre del banco es obligatorio.</p>
+          </div>
         </div>
          </div>
 
           <!-- Email -->
           <div>
-            <label for="email" class="payment-label">Email</label>
-            <input type="email" id="email" class="payment-input" placeholder="you@example.com" />
+            <label for="email"  class="payment-label">Email</label>
+            <input type="email" formControlName="email" id="email" class="payment-input" placeholder="you@example.com" />
+            <div *ngIf="paymentForm.get ('email')?.invalid && paymentForm.get('email')?.touched">
+              <p class="error-message" *ngIf="paymentForm.get('email')?.errors?.['required']">El email es obligatorio.</p>
+              <p class="error-message" *ngIf="paymentForm.get('email')?.errors?.['email']">El email no es valido.</p>
+            </div>
           </div>
 
           <!-- Botón de pago -->
@@ -225,7 +245,7 @@
         <!-- &nbsp; inserta un espacio a la fuerza -->
       </div>
       <div class="button-container">
-        <button class="cancelar-button" (click)="reiniciarFormulario()">Inicio</button>
+        <button class="cancelar-button" (click)="reiniciarFormulario()">Descargar PDF</button>
       </div>
     </div>
   </div>

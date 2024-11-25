@@ -315,8 +315,8 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 }
 
 .payment-input.ng-invalid.ng-touched {
-  border: 1px solid #d9534f; /* Borde rojo para inputs inválidos tocados */
-  background-color: #f8d7da; /* Fondo rojo claro en inputs inválidos */
+  border: 1px solid #d9534f;
+  background-color: #f8d7da;
 }
 
 .payment-button {
@@ -333,6 +333,19 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 .payment-button:disabled {
   background-color: #c0c0c0;
   cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.general-error {
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
 

@@ -10,7 +10,7 @@ header {
 
 .logo {
   height: 100px;
-  width: 150px; /* Ajusta el tamaño de la imagen */
+  width: 150px;
 }
 
 nav ul {
@@ -117,6 +117,9 @@ footer {
   padding: 20px;
 }
 
+.social-icon .fab {
+  color: blue;
+}
 
 .gallery img {
   width: 400px;
