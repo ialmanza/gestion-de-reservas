@@ -36,8 +36,9 @@ export class ReservasListComponent {
       const reservaId = reserva.id ? reserva.id.toString().toLowerCase() : '';
       const reservaEmail = reserva.email ? reserva.email.toLowerCase() : '';
       const reservaApellidos = reserva.last_name ? reserva.last_name.toLowerCase() : '';
+      const reservaCodigo = reserva.codigo_reserva ? reserva.codigo_reserva.toLowerCase() : '';
 
-      return reservaId.includes(query.toLowerCase()) || reservaEmail.includes(query.toLowerCase()) || reservaApellidos.includes(query.toLowerCase());
+      return reservaId.includes(query.toLowerCase()) || reservaEmail.includes(query.toLowerCase()) || reservaApellidos.includes(query.toLowerCase()) || reservaCodigo.includes((query.toLowerCase() || ''));
   });
   }
 
