@@ -1,6 +1,5 @@
 
 import { Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { RolesService } from '../../services/roles.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RolesBdService } from '../../services/roles-bd.service';
@@ -21,7 +20,7 @@ export class RolesTableComponent {
   isModalOpen = false;
   rolesDBService = inject(RolesBdService);
 
-  constructor(private rolesService: RolesService, private fb: FormBuilder, private rolesBdService: RolesBdService) {
+  constructor( private fb: FormBuilder, private rolesBdService: RolesBdService) {
     this.editRoleForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -36,7 +35,6 @@ export class RolesTableComponent {
     });
   }
 
-
   openEditModal(role: any) {
     this.selectedRole = role;
     this.editRoleForm.patchValue({
@@ -48,23 +46,20 @@ export class RolesTableComponent {
     this.isModalOpen = true;
   }
 
-
   onSubmit() {
     if (this.editRoleForm.valid) {
       const updatedRole = this.editRoleForm.value;
-      this.rolesService.updateRole(updatedRole);
+      this.rolesBdService.editarRolDB(updatedRole);
       this.isModalOpen = false;
     }
   }
-
 
   closeModal() {
     this.isModalOpen = false;
   }
 
-
   onDelete(email: string) {
-    this.rolesService.deleteRole(email);
+    this.rolesBdService.eliminarRolDb(email);
   }
 
 }

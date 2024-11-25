@@ -1,8 +1,9 @@
 import { AuthService } from './../Auth/auth.service';
 import { Component, inject } from '@angular/core'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RolesBdService } from '../../services/roles-bd.service';
 
 interface SignUpForm {
   email: FormControl<string | null>;
@@ -13,6 +14,7 @@ interface SignUpForm {
   selector: 'app-auth-sign-up',
   standalone: true,
   imports: [ ReactiveFormsModule],
+  providers: [AuthService, RolesBdService],
   templateUrl: './auth-sign-up.component.html',
   styleUrl: './auth-sign-up.component.css'
 })
@@ -24,12 +26,12 @@ export class AuthSignUpComponent {
 
   form = this._formBuilder.group<SignUpForm>({
     email: this._formBuilder.control<string | null>(null, [Validators.required, Validators.email]),
-    password: this._formBuilder.control<string | null>(null, [Validators.required])
+    password: this._formBuilder.control<string | null>(null, [Validators.required]),
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private rolesBdService: RolesBdService) {}
 
-  async submit() {
+  async submit(nombre: HTMLInputElement, apellido: HTMLInputElement) {
     if (this.form.invalid) return;
 
     try{
@@ -43,6 +45,7 @@ export class AuthSignUpComponent {
     } catch (error) {
       console.error(error);
     }
+    this.agregarRol(this.form, nombre, apellido);
     this.form.reset();
   }
 
@@ -50,6 +53,29 @@ export class AuthSignUpComponent {
     this.router.navigate(['/auth-login']);
   }
 
+  agregarRol(form: FormGroup, nombre?: HTMLInputElement, apellido?: HTMLInputElement) {
+    if (form.valid) {
+
+      const formData = {
+        email: form.value.email,
+        password: form.value.password,
+        rol : 'recepcionista',
+        nombre: '',
+        apellido: ''
+      };
+
+      if (nombre && apellido) {
+        formData['nombre'] = nombre.value;
+        formData['apellido'] = apellido.value;
+      }
+
+      console.log('Formulario enviado:', formData);
+      this.rolesBdService.insertarUsuarioDB(formData);
+
+    } else {
+      console.log('Formulario no válido');
+    }
+  }
 }
 
 

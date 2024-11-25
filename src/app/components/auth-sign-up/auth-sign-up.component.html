@@ -3,7 +3,22 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md bg-white p-8 rounded-lg shadow-lg">
       <h2 class="text-center text-3xl font-extrabold text-gray-900">Register</h2>
 
-      <form class="mt-8 space-y-6" method="POST" [formGroup]="form" (ngSubmit)="submit()">
+      <form class="mt-8 space-y-6" method="POST" [formGroup]="form" (ngSubmit)="submit(nombre, apellido)">
+
+        <div>
+          <label for="nombre" class="block text-sm font-medium text-gray-700" >Nombre</label>
+          <div class="mt-1">
+            <input id="nombre" name="nombre" type="text" #nombre required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" formControlName="password">
+          </div>
+        </div>
+
+        <div>
+          <label for="apellido" class="block text-sm font-medium text-gray-700" >Apellidos</label>
+          <div class="mt-1">
+            <input id="apellido" name="apellido" type="text" #apellido required class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" formControlName="password">
+          </div>
+        </div>
+
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <div class="mt-1">

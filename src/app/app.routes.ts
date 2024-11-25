@@ -17,6 +17,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ReservaDetailsComponent } from './components/reservaciones/reserva-details/reserva-details.component';
 import { PoliticPrivacidadComponent } from './components/politic-privacidad/politic-privacidad.component';
 import { HomeComponent } from './components/home/home.component';
+import { MissingFieldsModalComponent } from './components/missing-fields-modal/missing-fields-modal.component';
 
 export const routes: Routes = [
   {
@@ -136,6 +137,10 @@ export const routes: Routes = [
     path: 'politica-privacidad',
     component: PoliticPrivacidadComponent
   },
+  {
+    path: 'missing-fields-modal',
+    component: MissingFieldsModalComponent
+  }
 
 
 

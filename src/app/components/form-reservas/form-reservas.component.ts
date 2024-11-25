@@ -20,6 +20,8 @@ import { DataService } from '../../services/data-service.service';
 import { Reserva } from '../../models/Ireserva';
 import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserva-details.component";
 import { MatSelectModule } from '@angular/material/select';
+import { MissingFieldsModalComponent } from '../missing-fields-modal/missing-fields-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-form-reservas',
@@ -71,7 +73,7 @@ export class FormReservasComponent {
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor( private router: Router, private dataService: DataService)
+  constructor( private router: Router, private dataService: DataService, public dialog: MatDialog)
    {
 
     this.paymentForm = this._formBuilder.group({
@@ -94,7 +96,7 @@ export class FormReservasComponent {
     this.id_email = "";
     const id = Date.now().toString();
     this.id_email = id;
-
+    const missingFields = [];
 
     const first_name = this.nameFormGroup.get('first_name')?.value as string;
     const last_name = this.apellidosFormGroup.get('last_name')?.value as string;
@@ -102,8 +104,12 @@ export class FormReservasComponent {
     const phone_number = this.telefonoFormGroup.get('phone_number')?.value as string;
     const special_requests = this.comentarioFormGroup.get('special_requests')?.value as string;
 
-    // Conversión de fecha y hora a los formatos requeridos
-    const selectedDate = new Date(this.reservation_date!);
+     // Validar si la fecha es posterior a la fecha actual
+    const selectedDate = new Date(this.reservation_date!); // Conversión de fecha y hora a los formatos requeridos
+    const today = new Date();
+    if (selectedDate < today) {
+      missingFields.push('Fecha (debe ser posterior a hoy)');
+    }
     const formattedDate = selectedDate.toISOString().split('T')[0];
 
     // Ajustar reservation_time a formato hh:mm:ss.uuuuuu
@@ -114,6 +120,25 @@ export class FormReservasComponent {
         formattedTime = `${this.reservation_time}.000000`;
     }
 
+       // Check for missing required fields before making the API call
+
+    if (!first_name) {
+      missingFields.push('Nombre');
+    }
+    if (!last_name) {
+      missingFields.push('Apellidos');
+    }
+    if (!email || !this.validateEmail(email)) {
+      missingFields.push('Correo Electrónico (formato válido)');
+    }
+    // Add checks for other required fields
+
+
+    if (missingFields.length > 0) {
+      // Show modal indicating missing fields
+      this.openModal('Campos Faltantes', `Los siguientes campos obligatorios no se han completado: ${missingFields.join(', ')}`);
+      return; // Prevent the API call if any fields are missing
+    }
     // Llamada al servicio para crear la reserva
     this.dataService.createItem({
       id,
@@ -140,8 +165,17 @@ export class FormReservasComponent {
 
     this.avanzarPaso();
 }
+  openModal(title: string, message: string) {
+    const dialogRef = this.dialog.open(MissingFieldsModalComponent, {
+      data: { title, message }
+    });
+  }
 
+  validateEmail(email: string): boolean {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());  
 
+  }
   seleccionarPersonas(numero: number) {
     this.cantidadSeleccionada = numero;
 

@@ -81,36 +81,54 @@
     <!-- Datos personales -->
     <div  *ngIf="pasoActual === 4">
       <h2 class="text-lg font-semibold leading-6 text-gray-900 mb-4">Datos de Contacto</h2>
+
       <form [formGroup]="nameFormGroup">
         <mat-form-field>
           <mat-label>Nombre</mat-label>
           <input matInput placeholder="Nombre" formControlName="first_name" required>
+          <div *ngIf="nameFormGroup.get('first_name')?.errors">
+            <mat-error *ngIf="nameFormGroup.get('first_name')?.errors?.['required']">Nombre obligatorio</mat-error>
+          </div>
         </mat-form-field>
       </form>
+
       <form [formGroup]="apellidosFormGroup">
         <mat-form-field>
           <mat-label>Apellidos</mat-label>
           <input matInput placeholder="Apellidos" formControlName="last_name" required>
+          <div *ngIf="apellidosFormGroup.get('last_name')?.errors">
+            <mat-error *ngIf="apellidosFormGroup.get('last_name')?.errors?.['required']">Apellidos obligatorios</mat-error>
+          </div>
         </mat-form-field>
       </form>
+
       <form [formGroup]="emailFormGroup">
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" placeholder="Email" required>
+          <div *ngIf="emailFormGroup.get('email')?.errors">
+            <mat-error *ngIf="emailFormGroup.get('email')?.errors?.['required']">Email obligatorio</mat-error>
+          </div>
         </mat-form-field>
       </form>
+
       <form [formGroup]="telefonoFormGroup">
         <mat-form-field>
           <mat-label>Teléfono</mat-label>
           <input matInput formControlName="phone_number" placeholder="Ex. 12345678" required>
+          <div *ngIf="telefonoFormGroup.get('phone_number')?.errors">
+            <mat-error *ngIf="telefonoFormGroup.get('phone_number')?.errors?.['required']">Teléfono obligatorio</mat-error>
+          </div>
         </mat-form-field>
       </form>
+
       <form [formGroup]="comentarioFormGroup">
         <mat-form-field>
           <mat-label>Comentarios</mat-label>
           <input matInput formControlName="special_requests" placeholder="Comentarios">
         </mat-form-field>
       </form>
+
       <div class="button-container">
         <button class="cancelar-button" (click)="retrocederPaso()">Atrás</button>
         <button class="confirmar-button" (click)="avanzarPaso()">Siguiente</button>

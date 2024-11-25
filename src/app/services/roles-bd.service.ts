@@ -4,6 +4,7 @@ import { AuthService } from '../components/Auth/auth.service';
 
 
 interface Role {
+  id?: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -47,7 +48,6 @@ export class RolesBdService {
       const { data } = await this._supabaseClient
       .from('roles-reservas')
         .select()
-        //.eq('user_id', session?.user.id) // Comentar si se quieren todos los datos
         .returns<Role[]>();
 
         if (data && data.length > 0) {
@@ -78,10 +78,10 @@ export class RolesBdService {
         return null;
       }
 
-      return data?.rol || null; // Retorna el rol o null si no existe
+      return data?.rol || null;
     } catch (error) {
       console.error('Error fetching user role:', error);
-      return null; // Retorna null en caso de error
+      return null;
     }
   }
 
@@ -99,5 +99,24 @@ export class RolesBdService {
     }
   }
 
+  async editarRolDB(perroDB: Role) {
+    try {
+      const response = await this._supabaseClient.from('roles-reservas').update({
+        ...perroDB
+      }).eq('email', perroDB.email);
+      this.getRolesDB();
+    } catch (error) {
+      this._state.update(state => ({ ...state, error: true }));
+    }
+  }
+
+   async eliminarRolDb(email: string) {
+    try {
+      const response = await this._supabaseClient.from('roles-reservas').delete().eq('email', email);
+      this.getRolesDB();
+    } catch (error) {
+      this._state.update(state => ({ ...state, error: true }));
+    }
+  }
 
 }
