@@ -7,7 +7,6 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ReservasService } from '../../../services/reservas.service';
 
 @Component({
   selector: 'app-editar-reservacion',
@@ -51,7 +50,7 @@ export class EditarReservacionComponent {
       specials_requests: new FormControl(''),
     });
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<EditarReservacionComponent>, private reservacionesService: ReservasService) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<EditarReservacionComponent>) {
       this.reservaciones = JSON.stringify(data);
     }
 
@@ -73,14 +72,4 @@ export class EditarReservacionComponent {
       this.dialogRef.close(this.form.value);
       console.log(this.form.value);
     }
-
-    //onYesClick(): void {
-      //const updatedReserva = { ...this.data, ...this.form.value }; // Combina los datos originales con los nuevos valores del formulario
-      //this.dialogRef.close(updatedReserva); // Devuelve la reserva actualizada
-      //console.log(updatedReserva);
-   // }
-
-
-
   }
-

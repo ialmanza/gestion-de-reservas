@@ -9,20 +9,19 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {AsyncPipe} from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { ReservasService } from '../../services/reservas.service';
 import { Router } from '@angular/router';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import {ChangeDetectionStrategy, model} from '@angular/core';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { DataService } from '../../services/data-service.service';
 import { Reserva } from '../../models/Ireserva';
 import { ReservaDetailsComponent } from "../reservaciones/reserva-details/reserva-details.component";
 import { MatSelectModule } from '@angular/material/select';
 import { MissingFieldsModalComponent } from '../missing-fields-modal/missing-fields-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import jsPDF from 'jspdf';
+import { DataReservacionesService, ReservaDB } from '../../services/supabase_data/data-reservaciones.service';
 
 @Component({
   selector: 'app-form-reservas',
@@ -31,7 +30,7 @@ import jsPDF from 'jspdf';
     ReactiveFormsModule, AsyncPipe, MatCardModule, MatTabsModule, CommonModule, MatDatepickerModule, ReservaDetailsComponent,
     MatSelectModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ReservasService, provideNativeDateAdapter(), DataService],
+  providers: [ provideNativeDateAdapter(), DataReservacionesService],
   templateUrl: './form-reservas.component.html',
   styleUrl: './form-reservas.component.css'
 })
@@ -74,7 +73,7 @@ export class FormReservasComponent {
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor( private router: Router, private dataService: DataService, public dialog: MatDialog)
+  constructor( private router: Router, public dialog: MatDialog, private dataReservacionesService: DataReservacionesService)
    {
 
     this.paymentForm = this._formBuilder.group({
@@ -158,31 +157,25 @@ export class FormReservasComponent {
       return;
     }
 
-    this.dataService.createItem({
+    this.dataReservacionesService.createItem({
       id,
-      first_name,
-      last_name,
-      email,
-      special_requests,
+      nombre: first_name,
+      apellido: last_name,
+      email: email,
+      observaciones: special_requests,
       tipo_comida: this.tipo_comida!,
-      reservation_time: formattedTime,
-      reservation_date: formattedDate,
-      chairs_needed: this.cantidadSeleccionada!,
-      phone_number,
-      hide: true
-    }).subscribe({
-      next: (response) => {
-        this.mensajeRespuesta = 'Reserva realizada con éxito';
-        this.datosReserva = response;
-        console.log('Reserva creada:', response);
-      },
-      error: (error) => {
-        this.mensajeRespuesta = error.message;
-      }
-    });
+      hora: formattedTime!,
+      fecha: formattedDate,
+      persona: this.cantidadSeleccionada!,
+      telefono: phone_number,
+      codigo_reserva : this.generateUniqueHexCode()
+    })
 
-    this.avanzarPaso();
+    this.router.navigate(['/']);
+
+    //this.avanzarPaso();
 }
+
   openModal(title: string, message: string) {
     const dialogRef = this.dialog.open(MissingFieldsModalComponent, {
       data: { title, message }
@@ -272,22 +265,21 @@ export class FormReservasComponent {
 
   actualizarCantidad(): void {
     if (this.cantidadSeleccionada! < 1) {
-      this.cantidadSeleccionada = 1; // Evitar que sea menor a 1
+      this.cantidadSeleccionada = 1;
     }
   }
 
-
   cerrarYMostrarDetalles(reservaData: any) {
     this.reiniciarFormulario();
-    this.dataService.createItem(reservaData).subscribe({
-      next: (response) => {
+    this.dataReservacionesService.createItem(reservaData).then((response) => {
+
         this.mensajeRespuesta = 'Reserva realizada con éxito';
         this.datosReserva = response;
-      },
-      error: (error) => {
+
+    }).catch((error) => {
         this.mensajeRespuesta = error.message;
-      }
-    });
+      });
+
 
   }
 
@@ -314,12 +306,18 @@ export class FormReservasComponent {
       doc.text(`Comentarios: ${this.datosReserva.special_requests}`, 10, 80);
     }
 
-    // Agrega un agradecimiento o mensaje personalizado
+
     doc.text('¡Gracias por su reserva! Nos vemos pronto.', 10, 120);
 
     // Genera y descarga el archivo PDF
     doc.save(`reserva_${this.datosReserva.first_name}_${this.datosReserva.last_name}.pdf`);
   }
 
+  generateUniqueHexCode(): string {
+    const randomNum = Math.floor(Math.random() * 16**6);
+    const hexCode = randomNum.toString(16).padStart(6, '0');
+
+    return `#${hexCode}`;
+  }
 
 }

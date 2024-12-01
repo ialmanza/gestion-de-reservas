@@ -105,7 +105,7 @@
   background-repeat: no-repeat;
 }
 
-/* Estilo para las tarjetas */
+
 .card-container {
   width: 400px;
   max-width: 90%;
@@ -206,7 +206,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
 }
 
 
-/* Estilos generales para la pasarela de pago */
+
 .payment-container {
   max-width: 800px;
   margin: 0 auto;
@@ -216,7 +216,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Títulos y subtítulos */
+
 .payment-title {
   font-size: 24px;
   font-weight: 600;
@@ -231,7 +231,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
   color: #525f7f;
 }
 
-/* Estilo de los campos de entrada */
+
 .payment-input {
   width: 100%;
   padding: 12px;
@@ -248,7 +248,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
   outline: none;
 }
 
-/* Estilos del botón de pago */
+
 .payment-button {
   width: 100%;
   padding: 12px;
@@ -267,7 +267,7 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
   background-color: #E26539;
 }
 
-/* Estilos para los radios y checkbox */
+
 .payment-radio,
 .payment-checkbox {
   margin-right: 8px;
@@ -278,27 +278,27 @@ input[type="number"].no-arrows::-webkit-inner-spin-button {
   color: #525f7f;
 }
 
-/* Contenedor para el tipo de tarjeta */
+
 .card-type-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
 }
 
-/* Iconos de tarjetas */
+
 .card-icon {
   width: 40px;
   height: auto;
 }
 
-/* Contenedor de errores */
+
 .payment-error {
   color: #e63946;
   font-size: 14px;
   margin-top: 8px;
 }
 
-/* Estilos para el contenedor de banco */
+
 .bank-details-container {
   margin-top: 16px;
 }

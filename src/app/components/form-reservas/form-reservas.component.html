@@ -142,7 +142,7 @@
         <!-- Tipo de Tarjeta -->
         <div class="payment-container">
           <h2 class="payment-title">Verificar</h2>
-          <p class="payment-subtitle">Introducir datos de pago</p>
+          <p class="payment-subtitle">Introducir datos de pago <strong>(Simulación)</strong></p>
 
         <!-- Número de tarjeta -->
         <div>
@@ -238,8 +238,8 @@
       <h2 class="reservation-title">Datos de Reserva</h2>
       <div class="reservation-details">
         <p>
-          Muchas gracias <span class="reservation-label">{{ datosReserva.first_name }}</span> &nbsp; <span class="reservation-label">{{ datosReserva.last_name }}</span>, su reserva del dia <span class="reservation-label">{{ datosReserva.reservation_date | date: 'fullDate' }}</span>
-          a las <span class="reservation-label">{{ datosReserva.reservation_time }}</span> a sido confirmada. Su código es: <span class="reservation-label">{{ datosReserva.codigo_reserva }}</span>
+          Muchas gracias <span class="reservation-label">{{ datosReserva.nombre }}</span> &nbsp; <span class="reservation-label">{{ datosReserva.apellido }}</span>, su reserva del dia <span class="reservation-label">{{ datosReserva.fecha | date: 'fullDate' }}</span>
+          a las <span class="reservation-label">{{ datosReserva.hora }}</span> ha sido confirmada. Su código es: <span class="reservation-label">{{ datosReserva.codigo_reserva }}</span>
         </p>
 
         <!-- &nbsp; inserta un espacio a la fuerza -->

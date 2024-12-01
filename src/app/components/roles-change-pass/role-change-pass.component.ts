@@ -1,45 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RolesService } from '../../services/roles.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RolesBdService } from '../../services/roles-bd.service';
+import { AuthService } from '../Auth/auth.service';
 
 @Component({
   selector: 'app-role-change-pass',
   standalone: true,
   imports: [ReactiveFormsModule],
+  providers: [RolesBdService],
   templateUrl: './role-change-pass.component.html',
   styleUrl: './role-change-pass.component.css'
 })
 export class RoleChangePassComponent {
   changePasswordForm: FormGroup;
   errorMessage: string | null = null;
+  private _authService = inject(AuthService);
 
-  constructor(private fb: FormBuilder, private rolesService: RolesService) {
+  constructor(private fb: FormBuilder, private rolesService: RolesBdService) {
     this.changePasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       newPassword: ['', Validators.required]
     });
   }
 
-  onSubmit() {
-    if (this.changePasswordForm.valid) {
-      const { email, newPassword } = this.changePasswordForm.value;
+  async onSubmit() {
+    if (this.changePasswordForm.invalid) return;
 
+    try{
+        const authResponse= await this._authService.signUp(
+        {email: this.changePasswordForm.value.email ?? '', password: this.changePasswordForm.value.password ?? ''}
 
-      if (!this.rolesService.isEmailValid(email)) {
-        this.errorMessage = 'El correo electrónico no existe en el sistema.';
-        return;
-      }
+      );
 
+      if (authResponse.error) throw new Error(authResponse.error.message);
 
-      const success = this.rolesService.updatePassword(email, newPassword);
-
-      if (success) {
-        this.errorMessage = null;
-        alert('Contraseña actualizada exitosamente.');
-      } else {
-        this.errorMessage = 'Error al actualizar la contraseña.';
-      }
+    } catch (error) {
+      console.error(error);
     }
+    this.changePasswordForm.reset();
   }
 }

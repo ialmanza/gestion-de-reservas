@@ -6,19 +6,10 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-grafico',
   standalone: true,
-  template: `
-    <div class="chart-container">
-      <canvas #myChart></canvas>
-    </div>
-  `,
-  styles: [`
-    .chart-container {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-  `]
+  imports: [],
+  templateUrl: './grafico.component.html',
+  styleUrl: './grafico.component.css'
+
 })
 export class GraficoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('myChart') myChart!: ElementRef<HTMLCanvasElement>;

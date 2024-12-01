@@ -1,4 +1,4 @@
-import { RolesService } from './../../services/roles.service';
+
 import { SignInWithPasswordCredentials, SignUpWithPasswordCredentials } from '@supabase/supabase-js';
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '../../shared/data-acces/supabase.service';
@@ -15,7 +15,7 @@ export class AuthService {
   private authStateSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   authState: Observable<boolean> = this.authStateSubject.asObservable();
 
-  constructor(private rolesService: RolesService, private rolesBdService: RolesBdService) {
+  constructor( private rolesBdService: RolesBdService) {
 
   }
 

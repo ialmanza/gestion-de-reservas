@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as bcrypt from 'bcryptjs';
-import { RolesService } from '../../services/roles.service';
 import { RolesBdService } from '../../services/roles-bd.service';
 
 
@@ -10,7 +9,7 @@ import { RolesBdService } from '../../services/roles-bd.service';
   selector: 'app-roles',
   standalone: true,
   imports: [ CommonModule, ReactiveFormsModule ],
-  providers: [RolesService, RolesBdService],
+  providers: [ RolesBdService],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.css'
 })
@@ -19,7 +18,7 @@ export class RolesComponent {
   roleForm: FormGroup;
   roles: any[] = [];
 
-  constructor(private fb: FormBuilder, private rolesService: RolesService, private rolesBdService: RolesBdService) {
+  constructor(private fb: FormBuilder, private rolesBdService: RolesBdService) {
 
     this.roleForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -49,7 +48,7 @@ export class RolesComponent {
         rol: this.roleForm.value.rol
       };
       this.roles.push(newRole);
-      this.rolesService.addRole(newRole);
+      //this.rolesService.addRole(newRole);
       this.roleForm.reset();
       alert('Usuario agregado exitosamente');
     }
