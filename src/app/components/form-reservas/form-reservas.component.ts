@@ -171,6 +171,7 @@ export class FormReservasComponent {
       codigo_reserva : this.generateUniqueHexCode()
     })
 
+
     this.router.navigate(['/']);
 
     //this.avanzarPaso();
@@ -320,4 +321,77 @@ export class FormReservasComponent {
     return `#${hexCode}`;
   }
 
+  // reservasAutomaticas() {
+  //   const reservaciones = [
+  //     {
+  //       first_name: "Daniel",
+  //       last_name: "Hernandez",
+  //       email: "daniel.hernandez@example.com",
+  //       phone_number: "5566778899",
+  //       special_requests: "Mesa con vista al jardín",
+  //       reservation_date: "2024-12-08",
+  //       reservation_time: "19:00",
+  //       cantidadSeleccionada: 3,
+  //       tipo_comida: "Cena"
+  //     },
+  //     {
+  //       first_name: "Laura",
+  //       last_name: "Gonzalez",
+  //       email: "laura.gonzalez@example.com",
+  //       phone_number: "6677889900",
+  //       special_requests: "Decoración para cumpleaños",
+  //       reservation_date: "2024-12-09",
+  //       reservation_time: "11:00",
+  //       cantidadSeleccionada: 8,
+  //       tipo_comida: "Almuerzo"
+  //     },
+  //     {
+  //       first_name: "Carlos",
+  //       last_name: "Lopez",
+  //       email: "carlos.lopez@example.com",
+  //       phone_number: "7788990011",
+  //       special_requests: "Mesa en el área privada",
+  //       reservation_date: "2024-12-10",
+  //       reservation_time: "13:00",
+  //       cantidadSeleccionada: 10,
+  //       tipo_comida: "Almuerzo"
+  //     },
+  //     {
+  //       first_name: "Sofia",
+  //       last_name: "Ramirez",
+  //       email: "sofia.ramirez@example.com",
+  //       phone_number: "8899001122",
+  //       special_requests: "Espacio para una reunión de negocios",
+  //       reservation_date: "2024-12-11",
+  //       reservation_time: "13:00",
+  //       cantidadSeleccionada: 15,
+  //       tipo_comida: "Almuerzo"
+  //     },
+  //     {
+  //       first_name: "Miguel",
+  //       last_name: "Fernandez",
+  //       email: "miguel.fernandez@example.com",
+  //       phone_number: "9900112233",
+  //       special_requests: "Menú especial para niños",
+  //       reservation_date: "2024-12-12",
+  //       reservation_time: "21:00",
+  //       cantidadSeleccionada: 7,
+  //       tipo_comida: "Cena"
+  //     }
+  //   ];
+
+  //   // Uso para generar reservaciones automáticamente
+  //   reservaciones.forEach(reserva => {
+  //     this.nameFormGroup.setValue({ first_name: reserva.first_name });
+  //     this.apellidosFormGroup.setValue({ last_name: reserva.last_name });
+  //     this.emailFormGroup.setValue({ email: reserva.email });
+  //     this.telefonoFormGroup.setValue({ phone_number: reserva.phone_number });
+  //     this.comentarioFormGroup.setValue({ special_requests: reserva.special_requests });
+  //     this.reservation_date = reserva.reservation_date;
+  //     this.reservation_time = reserva.reservation_time;
+  //     this.cantidadSeleccionada = reserva.cantidadSeleccionada;
+  //     this.tipo_comida = reserva.tipo_comida;
+  //     this.adicionarReserva();
+  //   });
+  // }
 }
