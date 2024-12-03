@@ -33,10 +33,10 @@ export class ReservasListComponent {
     this.filteredReservas = this.reservas.filter(reserva => {
       const reservaId = reserva.id ? reserva.id.toString().toLowerCase() : '';
       const reservaEmail = reserva.email ? reserva.email.toLowerCase() : '';
-      const reservaApellidos = reserva.nombre ? reserva.apellido.toLowerCase() : '';
+      const reservaNombre = reserva.nombre ? reserva.nombre.toLowerCase() : '';
       const reservaCodigo = reserva.codigo_reserva ? reserva.codigo_reserva.toLowerCase() : '';
 
-      return reservaId.includes(query.toLowerCase()) || reservaEmail.includes(query.toLowerCase()) || reservaApellidos.includes(query.toLowerCase()) || reservaCodigo.includes((query.toLowerCase() || ''));
+      return reservaId.includes(query.toLowerCase()) || reservaEmail.includes(query.toLowerCase()) || reservaNombre.includes(query.toLowerCase()) || reservaCodigo.includes((query.toLowerCase() || ''));
   });
   }
 

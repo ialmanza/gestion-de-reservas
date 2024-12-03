@@ -2,8 +2,12 @@
 
 
 .logo {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  object-fit: cover;
 }
 
 body {
@@ -13,6 +17,84 @@ body {
 }
 
 
+.aside {
+  transition: transform 0.3s ease-in-out;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Ocultar scrollbar para Chrome, Safari y Opera */
+.aside::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
+
+/* Mobile styles (up to 640px) */
+@media (max-width: 640px) {
+  .logo {
+    height: 180px;
+    width: 180px;
+    padding: 5px;
+  }
+  .aside {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  /* .menu-icon {
+    display: block;
+    z-index: 1000;
+    color: #e66f44;
+    font-size: 30px;
+  } */
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  .sidebar {
+    transition: transform 0.5s ease-in-out;
+  }
+
+}
+
+/* Tablet styles (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .logo {
+    height: 200px;
+    width: 200px;
+    padding: 8px;
+  }
+
+  .aside {
+    width: 280px;
+    margin: 1rem;
+  }
+
+  button {
+    padding: 10px 18px;
+  }
+}
+
+/* Desktop styles (1025px and above) */
+@media (min-width: 1025px) {
+  .aside {
+    width: 18rem; /* 288px */
+    margin: 1rem;
+  }
+}
+
+/* Link styles */
 a {
   color: #00bcd4;
   text-decoration: none;
@@ -25,11 +107,10 @@ a:hover {
   border-bottom: 1px solid #82e9de;
 }
 
-
+/* Button styles */
 button {
   background-color: #e66f44;
   color: #121212;
-  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -41,21 +122,19 @@ button:hover {
   transform: scale(1.05);
 }
 
-
+/* Card styles */
 .card {
   background-color: #1e1e1e;
-  padding: 20px;
-  margin: 20px 0;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
-
+/* Form elements */
 input, textarea {
   background-color: #1e1e1e;
   border: 1px solid #555;
@@ -73,3 +152,24 @@ input:focus, textarea:focus {
   background-color: #1e1e1e;
   color: #e0e0e0;
 }
+
+/* Animation for sidebar toggle */
+.sidebar-enter {
+  transform: translateX(-100%);
+}
+
+.sidebar-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.sidebar-exit {
+  transform: translateX(0);
+}
+
+.sidebar-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms ease-in-out;
+}
+
+

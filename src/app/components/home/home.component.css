@@ -1,4 +1,60 @@
 
+.reservas-popup {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 60px;
+}
+
+.reservas-popup button {
+  padding: 10px 20px;
+  background-color: #E26539;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reservas-popup button:hover {
+  background-color: #E26337;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.hero-content button {
+  background-color: #f28582;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.hero-content button:hover {
+  background-color: #f6c9c3;
+}
+
+
+
+
+/* General Styles */
 header {
   display: flex;
   justify-content: space-between;
@@ -9,8 +65,8 @@ header {
 }
 
 .logo {
-  height: 100px;
-  width: 150px;
+  height: 80px;
+  width: auto;
 }
 
 nav ul {
@@ -22,16 +78,15 @@ nav ul {
 nav a {
   color: black;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 nav a:hover {
   color: white;
 }
 
-
 main {
-  padding: 40px;
+  padding: 20px;
   background-color: #EFDECA;
 }
 
@@ -66,8 +121,8 @@ main {
 .gallery-grid img {
   width: 100%;
   border-radius: 10px;
+  object-fit: cover;
 }
-
 
 .featured-menu {
   text-align: center;
@@ -76,24 +131,26 @@ main {
 
 .menu-items {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .menu-item {
-  width: 45%;
+  max-width: 300px;
+  text-align: center;
 }
 
 .menu-item img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
 }
-
 
 .reservation {
   text-align: center;
   margin-bottom: 40px;
-  padding: 60px;
 }
 
 .reservation button {
@@ -109,7 +166,6 @@ main {
   background-color: #E26337;
 }
 
-
 footer {
   background-color: #E26539;
   color: white;
@@ -117,89 +173,43 @@ footer {
   padding: 20px;
 }
 
-.social-icon .fab {
-  color: blue;
+/* Media Queries */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-items {
+    flex-direction: column;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 16px;
+  }
 }
 
-.gallery img {
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
-}
+@media (max-width: 480px) {
+  .gallery-grid img {
+    height: auto;
+  }
 
-.reservas-popup {
-  text-align: center;
-  margin-bottom: 40px;
-  padding: 60px;
-}
+  .menu-item img {
+    height: auto;
+  }
 
-.reservas-popup button {
-  padding: 10px 20px;
-  background-color: #E26539;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.reservas-popup button:hover {
-  background-color: #E26337;
-}
-
-.featured-menu {
-  text-align: center;
-}
-
-.featured-menu .menu-items {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.featured-menu .menu-item {
-  text-align: center;
-  max-width: 400px;
-}
-
-.featured-menu .menu-item img {
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-
-}
-
-
-
-.hero {
-  position: relative;
-  text-align: center;
-  color: #fff;
-}
-
-.hero img {
-  width: 100%;
-  height: auto;
-}
-
-.hero-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.hero-content button {
-  background-color: #f28582;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.hero-content button:hover {
-  background-color: #f6c9c3;
+  .welcome a,
+  .reservation button {
+    width: 100%;
+    text-align: center;
+  }
 }

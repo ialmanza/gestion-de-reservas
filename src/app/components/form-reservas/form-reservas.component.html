@@ -176,22 +176,22 @@
 
          <div class="card-type-container">
           <!-- Nombre en la tarjeta -->
-         <div>
-          <label for="cardHolderName" class="payment-label">Nombre del titular</label>
-          <input type="text" formControlName="cardHolderName" id="cardHolderName" class="payment-input" placeholder="John Doe" />
-          <div *ngIf="paymentForm.get('cardHolderName')?.invalid && paymentForm.get('cardHolderName')?.touched">
-            <p class="error-message" *ngIf="paymentForm.get('cardHolderName')?.errors?.['required']">El nombre del titular es obligatorio.</p>
+          <div>
+            <label for="cardHolderName" class="payment-label">Nombre del titular</label>
+            <input type="text" formControlName="cardHolderName" id="cardHolderName" class="payment-input" placeholder="John Doe" />
+            <div *ngIf="paymentForm.get('cardHolderName')?.invalid && paymentForm.get('cardHolderName')?.touched">
+              <p class="error-message" *ngIf="paymentForm.get('cardHolderName')?.errors?.['required']">El nombre del titular es obligatorio.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Nombre del banco -->
-        <div>
-          <label for="bankName" class="payment-label">Nombre del banco</label>
-          <input type="text" formControlName="bankName" id="bankName" class="payment-input" placeholder="Nombre del banco" required />
-          <div *ngIf="paymentForm.get('bankName')?.invalid && paymentForm.get('bankName')?.touched">
-            <p class="error-message" *ngIf="paymentForm.get('bankName')?.errors?.['required']">El nombre del banco es obligatorio.</p>
+          <!-- Nombre del banco -->
+          <div>
+            <label for="bankName" class="payment-label">Nombre del banco</label>
+            <input type="text" formControlName="bankName" id="bankName" class="payment-input" placeholder="Nombre del banco" required />
+            <div *ngIf="paymentForm.get('bankName')?.invalid && paymentForm.get('bankName')?.touched">
+              <p class="error-message" *ngIf="paymentForm.get('bankName')?.errors?.['required']">El nombre del banco es obligatorio.</p>
+            </div>
           </div>
-        </div>
          </div>
 
           <!-- Email -->

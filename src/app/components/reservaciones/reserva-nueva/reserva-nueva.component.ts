@@ -21,16 +21,11 @@ export class ReservaNuevaComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private dataService: DataReservacionesService) {
     this.editForm = this.fb.group({
-      id: [''],
       nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', Validators.required],
-      tipo_comida: ['', Validators.required],
-      horario: ['', Validators.required],
-      observaciones: [''],
-      reservation_date: ['', Validators.required],
-      chairs_needed: [1, Validators.required]
+      fecha: ['', Validators.required],
+      hora: ['', Validators.required],
     });
   }
 

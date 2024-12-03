@@ -7,13 +7,41 @@
     </a>
 
    <!-- Botón para cerrar el sidebar en pantallas pequeñas -->
-   <button class="font-sans font-medium text-center uppercase transition-all w-8 h-8 rounded-lg text-xs text-white  active:bg-white/30 absolute right-0 top-0 xl:hidden" type="button" (click)="toggleSidebar()">
+   <button class="font-sans font-bold text-center uppercase transition-all w-8 h-8 rounded-lg text-xs text-white  active:bg-white/30 absolute right-0 top-2 xl:hidden" type="button" (click)="toggleSidebar()">
     <span class="grid place-items-center">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
       </svg>
     </span>
   </button>
+
+  <!-- <div class="menu-icon uppercase transition-all w-8 h-8 rounded-lg text-xs text-[#e66f44]  active:bg-white/30 absolute right-0 top-2.5 xl:hidden" (click)="toggleSidebar()">☰</div> -->
+    <!-- <button
+    class="font-sans font-medium text-center uppercase transition-all w-8 h-8 rounded-lg text-xs text-white active:bg-white/30 absolute right-0 top-0 xl:hidden"
+    type="button"
+    (click)="toggleSidebar()"
+  >
+    <span class="grid place-items-center">
+      <svg
+        *ngIf="isSidebarOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6"
+      >
+        <path d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      <svg
+        *ngIf="!isSidebarOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6"
+      >
+        <path d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </span>
+  </button> -->
 </div>
 
   <div class="m-4">
