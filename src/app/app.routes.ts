@@ -35,6 +35,10 @@ export const routes: Routes = [
     path: 'form-reservas',
     component: FormReservasComponent,
   },
+  {
+    path:'cancelar-reservacion',
+    component: CancelarReservacionComponent
+  },
 
    {
     path: 'layout',
