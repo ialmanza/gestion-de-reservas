@@ -59,7 +59,7 @@ export class AuthSignUpComponent {
       const formData = {
         email: form.value.email,
         password: form.value.password,
-        rol : 'recepcionista',
+        rol : 'asistente',
         nombre: '',
         apellido: ''
       };
